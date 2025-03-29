@@ -6,9 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js"></script>
+    <script src="calendar.js" defer></script>
     <title>Momentum</title>
 </head>
 <body>
-    
+    <div id="leftMain">
+        <div id="upperLeft">
+            <div id="header">
+                <p>placeholder</p>
+                <p>placeholder</p>
+            </div>
+        </div>
+        <div id="bottomLeft">
+            <div id="mainBody">
+                <div id="calendar"></div>
+            </div>
+        </div>
+    </div>
+    <div id="rightMain">
+        <div id="taskBar">
+            <div id="taskBarHeader">
+                <h1>Today</h1>
+                <button id="addTaskButton">add event/task</button>
+            </div>
+            <div id="taskBarBody">
+                <h2>upcoming</h2>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
+
+<!--
+
+    so my thoughts are to make a layout like this:
+    _______________________  _______
+    |        header       |  |     |
+    -----------------------  |task |
+    _______________________  |  bar|
+    |                     |  |     |
+    |       calendar      |  |     |
+    |                     |  |     |
+    |                     |  |     |
+    |                     |  |     |
+    -----------------------  -------
+-->
