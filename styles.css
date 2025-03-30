@@ -74,3 +74,8 @@ body {
     vertical-align: top;
 }
 
+.calendarCell:hover {
+    background-color: #ccc;
+    cursor: pointer;
+    transition: 0.1s;
+}
