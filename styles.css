@@ -4,23 +4,25 @@ body {
 }
 
 #leftMain {
-    width: 75%;
+    width: 70%;
     padding-right: 5px;
     border: 3px solid purple;
+    display: block;
 }
 
-#upperLeft {
+#leftMain > #upperLeft {
     padding-bottom: 5px;
 }
 
-#bottomLeft {
+#leftMain > #bottomLeft {
     padding-top: 5px;
 }
 
 #rightMain {
-    width: 25%;
+    width: 30%;
     padding-left: 5px;
     border: 3px solid lime;
+    display: flex;
 }
 
 #header {
@@ -48,20 +50,43 @@ body {
     background-color: white;
     border-radius: 10px;
     padding: 1%;
-
+    width: 100%;
 }
 
 #taskBarHeader {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-
-/* #taskBarHeader:last-child {
-    justify-content: right;
-} */
 
 #taskBarHeader > #addTaskButton {
     border-radius: 10px;
-    padding: 0;
+    padding: 1em;
+    background-color: rgb(50, 115, 255);
+    color: white;
+}
+
+#taskBarHeader > #addTaskButton:hover {
+    cursor: pointer;
+    background-color: rgb(39, 93, 209);
+    transition: 0.1s;
+}
+
+#addTask {
+    text-align: center;
+}
+
+#itemInformation {
+    border: 3px solid pink;
+}
+
+#itemInformation > label{
+    display: block;
+}
+
+#itemTypeSelection {
+    text-align: center;
+    border: 3px solid orange;
 }
 
 .calendarCell {
@@ -78,4 +103,8 @@ body {
     background-color: #ccc;
     cursor: pointer;
     transition: 0.1s;
+}
+
+.calendarCellActive {
+    background-color: rgb(50, 115, 255);
 }
