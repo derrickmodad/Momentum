@@ -2,15 +2,6 @@
 
 buildCalendar();
 
-document.getElementById("addTaskButton").addEventListener("click", function() {
-    let date = document.getElementById("taskBarHeaderDay").innerHTML;
-    let dayRE = /\d{1,2}\/(\d{1,2})\//;
-    let day = date.match(dayRE);
-    
-    //generateNewTask(day);
-    //function to generate task and append it to given day
-});
-
 function buildCalendar() {
     let calendar = document.getElementById("calendar");
     let today = new Date();
@@ -40,8 +31,8 @@ function buildCalendar() {
         });
 
         if (i === today) {
-            newDay.style.backgroundColor = "rgb(94, 161, 255)";
-            focusDay(-1);
+            newDay.classList.add("calendarCellActive");
+            focusDay(i);
         }
 
         row.appendChild(newDay);
@@ -65,13 +56,17 @@ function getDaysInMonth(year, month) {
 
 function focusDay(day) {
     let header = document.getElementById("taskBarHeaderDay");
-    //let body = document.getElementById("taskBarBody");
-    
-    let dateForHeader = new Date();
-    if (day !== -1) {
-        dateForHeader = new Date(dateForHeader.getFullYear(), dateForHeader.getMonth(), day);
-    }
 
-    dateForHeader = dateForHeader.toLocaleDateString();
+    let dateForHeader = new Date();
+    dateForHeader = new Date(dateForHeader.getFullYear(), dateForHeader.getMonth(), day);
+    
+    const options = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+    };
+
+    dateForHeader = dateForHeader.toLocaleDateString(navigator.language, options);
     header.innerHTML = dateForHeader; 
 }
