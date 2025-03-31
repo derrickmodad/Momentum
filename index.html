@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <script src="script.js"></script>
     <script src="calendar.js" defer></script>
+    <script src="task.js" defer></script>
     <title>Momentum</title>
 </head>
 <body>
@@ -27,10 +28,34 @@
         <div id="taskBar">
             <div id="taskBarHeader">
                 <h1 id="taskBarHeaderDay">Today</h1>
-                <button id="addTaskButton">add event/task</button>
+                <button id="addTaskButton">Add Item</button>
             </div>
             <div id="taskBarBody">
-                <h2>upcoming</h2>
+                <div id="currentTasks">
+                    <h2>upcoming</h2>
+                    <div id="tasks"></div>
+                </div>
+                <div id="taskCreation">
+                    <h2>Add Item</h2>
+                    <form id="addTask">
+                        <div id="itemInformation">
+                            <label for="titleOfItem">Title</label>
+                            <input type="text" name="titleOfItem" id="titleOfItem" required>
+                            <label for="descriptionOfItem">Description</label>
+                            <input type="text" name="descriptionOfItem" id="descriptionOfItem">
+                        </div>
+                        <div id="itemTypeSelection">
+                            <label for="eventSelectButton">Event</label>
+                            <input type="radio" name="itemType" id="eventSelectButton" value="Event" required>
+                            <label for="taskSelectButton">Task</label>
+                            <input type="radio" name="itemType" id="taskSelectButton" value="Task">
+                        </div>
+                        <div id="addTaskFormControl">
+                            <button id="cancelTaskCreation">Cancel</button>
+                            <button id="finishTaskCreation">Finish</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
