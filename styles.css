@@ -66,6 +66,12 @@ body {
     color: white;
 }
 
+#taskBarHeader > #addTaskButton:disabled {
+    background-color: rgba(50, 115, 255, 0.295);
+    color: rgb(92, 92, 92);
+    pointer-events: none;
+}
+
 #taskBarHeader > #addTaskButton:hover {
     cursor: pointer;
     background-color: rgb(39, 93, 209);
@@ -87,6 +93,10 @@ body {
 #itemTypeSelection {
     text-align: center;
     border: 3px solid orange;
+}
+
+.hidden {
+    display: none;
 }
 
 .calendarCell {
