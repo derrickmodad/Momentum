@@ -117,4 +117,5 @@ body {
 
 .calendarCellActive {
     background-color: rgb(50, 115, 255);
+    color: white;
 }
