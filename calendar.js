@@ -11,6 +11,15 @@ function buildCalendar() {
     generatedCalendar.id = "generatedCalendar";
 
     let row = document.createElement("tr");
+    let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    for (let day of days) {
+        let header = document.createElement("td");
+        header.innerHTML = day;
+        row.appendChild(header);
+    }
+    generatedCalendar.appendChild(row);
+    
+    row = document.createElement("tr");
 
     let firstDay = new Date(today.getFullYear(), today.getMonth(), 1).getDay();  
     
@@ -56,7 +65,6 @@ function getDaysInMonth(year, month) {
 
 function focusDay(day) {
     let header = document.getElementById("taskBarHeaderDay");
-
     let dateForHeader = new Date();
     dateForHeader = new Date(dateForHeader.getFullYear(), dateForHeader.getMonth(), day);
     
