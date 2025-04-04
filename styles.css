@@ -100,8 +100,8 @@ body {
 }
 
 .calendarCell {
-    width: 5em;
-    height: 5em;
+    width: 8.5em;
+    height: 8.5em;
     border: 1px solid #ccc;
     position: relative;
     padding: 0.5em;
