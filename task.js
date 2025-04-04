@@ -22,23 +22,24 @@
 let itemsForDays = [];
 
 class Item {
-    constructor(title, desc) {
+    constructor(title, desc, color) {
         this.title = title;
         this.desc = desc;
+        this.color = color
     }
 }
 
 class Task extends Item {
-    constructor(title, desc, priority, deadline) {
-        super(title, desc);
+    constructor(title, desc, color, priority, deadline) {
+        super(title, desc, color);
         this.priority = priority;
         this.deadline = deadline;
     }
 }
 
 class Event extends Item {
-    constructor(title, desc, location, startTime, endTime) {
-        super(title, desc);
+    constructor(title, desc, color, location, startTime, endTime) {
+        super(title, desc, color);
         this.location = location;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -143,23 +144,22 @@ function generateNewTask() {
     let eventButton = document.getElementById("eventSelectButton");
     let newItem;
 
+    let title, desc, color;
+    title = form.elements.titleOfItem.value;
+    desc = form.elements.descriptionOfItem.value;
+    color = form.elements.itemColorOption.value;
+
     if (eventButton.checked) {
-        let title, desc, location, startTime, endTime;
-        title = form.elements.titleOfItem.value;
-        desc = form.elements.descriptionOfItem.value;
+        let location, startTime, endTime;
         location = form.elements.eventLocation.value;
         startTime = form.elements.eventStartTime.value;
         endTime = form.elements.eventEndTime.value;
-
-        newItem = new Event(title, desc, location, startTime, endTime);
+        newItem = new Event(title, desc, color, location, startTime, endTime);
     } else {
-        let title, desc, priority, deadline;
-        title = form.elements.titleOfItem.value;
-        desc = form.elements.descriptionOfItem.value;
+        let priority, deadline;
         priority = form.elements.taskPriority.value; //check this
         deadline = form.elements.taskDeadline.value;
-
-        newItem = new Task(title, desc, priority, deadline);
+        newItem = new Task(title, desc, color, priority, deadline);
     }
 
     itemsForDays[day].push(newItem);
@@ -173,8 +173,28 @@ function generateNewTask() {
 //when a day is selected, the list[day] should be displayed in the div
 //---- LEAVING FOR REFERENCE (REMOVE IF DETERMINED UNNEEDED)
 
+//-------------
+//TO DO:
+
+//STYLE THE TASK CREATION MENU
+
 //NOW NEED TO SHOW THE TASKS/EVENTS FOR THE SELECTED DAY
 //IF NO TASKS, SAY NO TASKS with like a message or something
 
 //ALSO, CHECK THAT REQUIRED FORM ELEMENTS PROHIBIT SUBMISSION UNTIL FILLED IN
 // SPOILER: I DON'T THINK THEY DO THAT, SO THERE CAN BE NULL VALUES 
+
+//weird bug in itemCreation that says non visible elements should be filled in
+//like task elements shouldnt be null when making an event item
+
+//------------
+
+//backburner:
+//uh, add color options to the event/task creation menu
+// like, user can set color to easily identify what the item is for
+//--update: so got the selection list, but it seems hard to style
+//  will have to look into later
+
+//------------
+
+//remember to look at the notepad, there's some written thoughts/ideas in it
