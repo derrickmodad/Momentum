@@ -50,6 +50,18 @@
                             <label for="descriptionOfItem">Description</label>
                             <input type="text" name="descriptionOfItem" id="descriptionOfItem">
                         </div>
+                        <div id="colorSelection">
+                            <select name="itemColorOption" id="itemColorOption" required>
+                                <option value="placeholder" disabled selected>Color</option>
+                                <option value="red" id="colorOptionRed" class="colorOption">Red</option>
+                                <option value="orange" id="colorOptionOrange" class="colorOption">Orange</option>
+                                <option value="yellow" id="colorOptionYellow" class="colorOption">Yellow</option>
+                                <option value="green" id="colorOptionGreen" class="colorOption">Green</option>
+                                <option value="blue" id="colorOptionBlue" class="colorOption">Blue</option>
+                                <option value="purple" id="colorOptionPurple" class="colorOption">Purple</option>
+                                <option value="gray" id="colorOptionGray" class="colorOption">Gray</option>
+                            </select>
+                        </div>
                         <div id="itemTypeSelection">
                             <label for="eventSelectButton">Event</label>
                             <input type="radio" name="itemType" class="itemTypeRadioButton" id="eventSelectButton" value="Event" required>
@@ -76,7 +88,7 @@
                         </div>
                         <div id="addTaskFormControl">
                             <button type="button" id="cancelTaskCreation">Cancel</button>
-                            <button type="button" id="finishTaskCreation">Finish</button>
+                            <button type="submit" id="finishTaskCreation">Finish</button>
                         </div>
                     </form>
                 </div>
