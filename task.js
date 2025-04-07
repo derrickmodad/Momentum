@@ -80,11 +80,11 @@ function setupItemType() {
 
     function updateVisibility() {
         if (eventRadio.checked) {
-            eventOptions.style.display = "block";
-            taskOptions.style.display = "none";
+            eventOptions.className = "subItemInfo";
+            taskOptions.className = "hidden";
         } else if (taskRadio.checked) {
-            eventOptions.style.display = "none";
-            taskOptions.style.display = "block";
+            eventOptions.className = "hidden";
+            taskOptions.className = "subItemInfo";
         }
     }
 
@@ -108,8 +108,8 @@ function setupTaskCreationFormControls() {
     finish.addEventListener("click", function() {
         generateNewTask();
         form.reset();
-        document.getElementById("eventOptions").style.display = "none";
-        document.getElementById("taskOptions").style.display = "none";
+        document.getElementById("eventOptions").className = "hidden";
+        document.getElementById("taskOptions").className = "hidden";
         toggleTaskMenuVisibility();
         document.getElementById("addTaskButton").disabled = false;
     })
@@ -181,20 +181,24 @@ function generateNewTask() {
 //NOW NEED TO SHOW THE TASKS/EVENTS FOR THE SELECTED DAY
 //IF NO TASKS, SAY NO TASKS with like a message or something
 
+//SHOW TASKS/EVENTS ON CALENDAR
+
 //ALSO, CHECK THAT REQUIRED FORM ELEMENTS PROHIBIT SUBMISSION UNTIL FILLED IN
 // SPOILER: I DON'T THINK THEY DO THAT, SO THERE CAN BE NULL VALUES 
 
 //weird bug in itemCreation that says non visible elements should be filled in
 //like task elements shouldnt be null when making an event item
 
+//DROP DOWN BUTTONS FOR VIEW, MONTH, YEAR
+// this is next to calendar so user can change to like a weekly (or even daily) view, and can change the month/year
+
 //------------
 
-//backburner:
+//BACKBURNER:
+
 //uh, add color options to the event/task creation menu
 // like, user can set color to easily identify what the item is for
 //--update: so got the selection list, but it seems hard to style
 //  will have to look into later
 
 //------------
-
-//remember to look at the notepad, there's some written thoughts/ideas in it
