@@ -177,6 +177,9 @@ function generateNewTask() {
 //TO DO:
 
 //STYLE THE TASK CREATION MENU
+//--update: getting closer, just got the layout for the event and task submenus
+//              did notice that the priority is off by a few pixels on the task side
+//              i dont know if this matters, the priority menu might change later if i can come up with a custom radio button
 
 //NOW NEED TO SHOW THE TASKS/EVENTS FOR THE SELECTED DAY
 //IF NO TASKS, SAY NO TASKS with like a message or something
@@ -200,5 +203,7 @@ function generateNewTask() {
 // like, user can set color to easily identify what the item is for
 //--update: so got the selection list, but it seems hard to style
 //  will have to look into later
+//  
+//--update: i think that instead of selection list, customized radio buttons could be used instead 
 
 //------------
