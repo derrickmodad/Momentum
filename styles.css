@@ -59,22 +59,25 @@ body {
     align-items: center;
 }
 
+/* ITEM CREATION */
+
 #taskBarHeader > #addTaskButton {
     border-radius: 10px;
     padding: 1em;
-    background-color: rgb(50, 115, 255);
+    background-color: rgb(0, 0, 0);
     color: white;
 }
 
 #taskBarHeader > #addTaskButton:disabled {
-    background-color: rgba(50, 115, 255, 0.295);
+    background-color: rgb(136, 136, 136);
     color: rgb(92, 92, 92);
     pointer-events: none;
 }
 
 #taskBarHeader > #addTaskButton:hover {
     cursor: pointer;
-    background-color: rgb(39, 93, 209);
+    background-color: rgb(255, 255, 255);
+    color: black;
     transition: 0.1s;
 }
 
@@ -86,8 +89,13 @@ body {
     border: 3px solid pink;
 }
 
-#itemInformation > label{
-    display: block;
+.subItemInfo {
+    padding: 1em;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid gold;
+    display: flex;
+    justify-content: space-between;
 }
 
 #itemTypeSelection {
@@ -97,6 +105,56 @@ body {
 
 .hidden {
     display: none;
+}
+
+.comboOptionsInner {
+    width: 100%;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.9em;
+    margin-top: 0.4em;
+}
+
+.form-row label {
+    width: auto; 
+    margin-right: 1em;
+    flex: 0.3;
+    text-align: right;
+}
+
+.form-row input {
+    flex: 0.7; 
+    padding: 0.5em;
+}
+
+.form-row select {
+    flex: 0.7;
+    padding: 0.5em;
+}
+
+.formControlButton {
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    padding: 1em;
+}
+
+.formControlButton:hover {
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+#cancelTaskCreation:hover {
+    background-color: red;
+    color: black;
+}
+
+#finishTaskCreation:hover {
+    background-color: rgb(0, 227, 0);
+    color: black;
 }
 
 .calendarCell {
