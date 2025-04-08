@@ -45,12 +45,16 @@
                     <h2>Add Item</h2>
                     <form id="addTask">
                         <div id="itemInformation">
-                            <label for="titleOfItem">Title</label>
-                            <input type="text" name="titleOfItem" id="titleOfItem" required>
-                            <label for="descriptionOfItem">Description</label>
-                            <input type="text" name="descriptionOfItem" id="descriptionOfItem">
+                            <div id="titleInformation" class="subItemInfo">
+                                <label for="titleOfItem">Title</label>
+                                <input type="text" name="titleOfItem" id="titleOfItem" required>
+                            </div>
+                            <div id="descriptionInformation" class="subItemInfo">
+                                <label for="descriptionOfItem">Description</label>
+                                <input type="text" name="descriptionOfItem" id="descriptionOfItem">
+                            </div>
                         </div>
-                        <div id="colorSelection">
+                        <div id="colorSelection" class="subItemInfo">
                             <select name="itemColorOption" id="itemColorOption" required>
                                 <option value="placeholder" disabled selected>Color</option>
                                 <option value="red" id="colorOptionRed" class="colorOption">Red</option>
@@ -69,26 +73,46 @@
                             <input type="radio" name="itemType" class="itemTypeRadioButton" id="taskSelectButton" value="Task">
                         </div>
                         <div id="eventOptions" class="hidden">
-                            <label for="eventLocation">Location:</label>
-                            <input type="text" id="eventLocation" name="eventLocation" required>
-                            <label for="eventStartTime">Start Time:</label>
-                            <input type="time" id="eventStartTime" name="eventStartTime" required>
-                            <label for="eventEndTime">End Time:</label>
-                            <input type="time" id="eventEndTime" name="eventEndTime" required>
+                            <div id="eventOptionsInner" class="comboOptionsInner">
+                                <fieldset>
+                                    <legend>Event Information</legend>
+                                    <div class="form-row">
+                                        <label for="eventLocation">Location:</label>
+                                        <input type="text" id="eventLocation" name="eventLocation" required>
+                                    </div>
+                                    <div class="form-row">
+                                        <label for="eventStartTime">Start Time:</label>
+                                        <input type="time" id="eventStartTime" name="eventStartTime" required>
+                                    </div>
+                                    <div class="form-row">
+                                        <label for="eventEndTime">End Time:</label>
+                                        <input type="time" id="eventEndTime" name="eventEndTime" required>
+                                    </div>
+                                </fieldset>
+                            </div>
                         </div>
                         <div id="taskOptions" class="hidden">
-                            <label for="taskPriority">Priority:</label>
-                            <select id="taskPriority" name="taskPriority" required>
-                                <option>Low</option>
-                                <option>Medium</option>
-                                <option>High</option>
-                            </select>
-                            <label for="taskDeadline">Deadline:</label>
-                            <input type="time" id="taskDeadline" name="taskDeadline" required>
+                            <div id="taskOptionsInner" class="comboOptionsInner">
+                                <fieldset>
+                                    <legend>Task Information</legend>
+                                    <div class="form-row">
+                                        <label for="taskPriority">Priority:</label>
+                                        <select id="taskPriority" name="taskPriority" required>
+                                            <option>Low</option>
+                                            <option>Medium</option>
+                                            <option>High</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-row">
+                                        <label for="taskDeadline">Deadline:</label>
+                                        <input type="time" id="taskDeadline" name="taskDeadline" required>
+                                    </div>
+                                </fieldset>
+                            </div>
                         </div>
-                        <div id="addTaskFormControl">
-                            <button type="button" id="cancelTaskCreation">Cancel</button>
-                            <button type="submit" id="finishTaskCreation">Finish</button>
+                        <div id="addTaskFormControl" class="subItemInfo">
+                            <button type="button" id="cancelTaskCreation" class="formControlButton">Cancel</button>
+                            <button type="submit" id="finishTaskCreation" class="formControlButton">Finish</button>
                         </div>
                     </form>
                 </div>
