@@ -111,26 +111,26 @@ body {
     width: 100%;
 }
 
-.form-row {
+.formRow {
     display: flex;
     align-items: center;
     margin-bottom: 0.9em;
     margin-top: 0.4em;
 }
 
-.form-row label {
+.formRow label {
     width: auto; 
     margin-right: 1em;
     flex: 0.3;
     text-align: right;
 }
 
-.form-row input {
+.formRow input {
     flex: 0.7; 
     padding: 0.5em;
 }
 
-.form-row select {
+.formRow select {
     flex: 0.7;
     padding: 0.5em;
 }
