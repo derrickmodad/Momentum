@@ -83,13 +83,15 @@ body {
 
 #addTask {
     text-align: center;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 0.2em;
 }
 
 .subItemInfo {
     padding: 1em;
     align-items: center;
     justify-content: center;
-    border: 3px solid gold;
     display: flex;
     justify-content: space-between;
 }
@@ -105,7 +107,6 @@ body {
     width: 100%;
     align-items: center;
     justify-content: space-between;
-    border: 3px solid orange;
     display: flex;
     gap: 10px;
 }
@@ -141,6 +142,10 @@ body {
 
 .comboOptionsInner {
     width: 100%;
+}
+
+.comboOptionsInner > fieldset {
+    border-radius: 10px;
 }
 
 .formRow {
