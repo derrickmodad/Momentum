@@ -85,10 +85,6 @@ body {
     text-align: center;
 }
 
-#itemInformation {
-    border: 3px solid pink;
-}
-
 .subItemInfo {
     padding: 1em;
     align-items: center;
@@ -98,13 +94,49 @@ body {
     justify-content: space-between;
 }
 
+/* ITEM TYPE SELECTION */
+
 #itemTypeSelection {
-    text-align: center;
-    border: 3px solid orange;
+    display: flex;
+    justify-content: center;
 }
+
+#itemTypeSelectionInner {
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    border: 3px solid orange;
+    display: flex;
+    gap: 10px;
+}
+  
+#itemTypeSelectionInner input {
+    display: none;
+}
+  
+#itemTypeSelectionInner label {
+    padding: 0.5em 1em;
+    border: 2px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+    background-color: white;
+    color: black;
+    transition: 0.2s;
+    width: 50%;
+}
+  
+#itemTypeSelectionInner input[type="radio"]:checked + label{
+    background-color: black;
+    color: white;
+    width: 150%;
+}
+
+/* END ITEM TYPE SELECTION */
 
 .hidden {
     display: none;
+    transition: 0.5s ease-in-out;
 }
 
 .comboOptionsInner {
@@ -128,6 +160,12 @@ body {
 .formRow input {
     flex: 0.7; 
     padding: 0.5em;
+}
+
+.formRow textarea {
+    flex: 0.7;
+    padding: 0.5em;
+    font-family: sans-serif;
 }
 
 .formRow select {
@@ -156,6 +194,8 @@ body {
     background-color: rgb(0, 227, 0);
     color: black;
 }
+
+/* CALENDAR */
 
 .calendarCell {
     width: 8.5em;

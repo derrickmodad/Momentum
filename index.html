@@ -44,14 +44,19 @@
                 <div id="taskCreation" class="hidden">
                     <h2>Add Item</h2>
                     <form id="addTask">
-                        <div id="itemInformation">
-                            <div id="titleInformation" class="subItemInfo">
-                                <label for="titleOfItem">Title</label>
-                                <input type="text" name="titleOfItem" id="titleOfItem" required>
-                            </div>
-                            <div id="descriptionInformation" class="subItemInfo">
-                                <label for="descriptionOfItem">Description</label>
-                                <input type="text" name="descriptionOfItem" id="descriptionOfItem">
+                        <div id="itemInformation" class="subItemInfo">
+                            <div id="itemInformationInner" class="comboOptionsInner">
+                                <fieldset>
+                                    <legend>Overview</legend>
+                                    <div class="formRow">
+                                        <label for="titleOfItem">Title:</label>
+                                        <input type="text" name="titleOfItem" id="titleOfItem" required>
+                                    </div>
+                                    <div class="formRow">
+                                        <label for="descriptionOfItem">Description:</label>
+                                        <textarea name="descriptionOfItem" id="descriptionOfItem" rows="4"></textarea>
+                                    </div>
+                                </fieldset>
                             </div>
                         </div>
                         <div id="colorSelection" class="subItemInfo">
@@ -67,10 +72,12 @@
                             </select>
                         </div>
                         <div id="itemTypeSelection">
-                            <label for="eventSelectButton">Event</label>
-                            <input type="radio" name="itemType" class="itemTypeRadioButton" id="eventSelectButton" value="Event" required>
-                            <label for="taskSelectButton">Task</label>
-                            <input type="radio" name="itemType" class="itemTypeRadioButton" id="taskSelectButton" value="Task">
+                            <div id="itemTypeSelectionInner">
+                                <input type="radio" name="itemType" class="itemTypeRadioButton" id="eventSelectButton" value="Event" required>
+                                <label for="eventSelectButton">Event</label>
+                                <input type="radio" name="itemType" class="itemTypeRadioButton" id="taskSelectButton" value="Task">
+                                <label for="taskSelectButton">Task</label>
+                            </div>
                         </div>
                         <div id="eventOptions" class="hidden">
                             <div id="eventOptionsInner" class="comboOptionsInner">
