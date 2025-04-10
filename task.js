@@ -99,6 +99,8 @@ function setupTaskCreationFormControls() {
     let cancel = document.getElementById("cancelTaskCreation");
     cancel.addEventListener("click", function() {
         form.reset();
+        document.getElementById("eventOptions").className = "hidden";
+        document.getElementById("taskOptions").className = "hidden";
         toggleTaskMenuVisibility();
         document.getElementById("addTaskButton").disabled = false;
     });
@@ -180,6 +182,8 @@ function generateNewTask() {
 //--update: getting closer, just got the layout for the event and task submenus
 //              did notice that the priority is off by a few pixels on the task side
 //              i dont know if this matters, the priority menu might change later if i can come up with a custom radio button
+
+//ADD RECURRING TO EVENTS/TASKS
 
 //NOW NEED TO SHOW THE TASKS/EVENTS FOR THE SELECTED DAY
 //IF NO TASKS, SAY NO TASKS with like a message or something
