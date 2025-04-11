@@ -209,7 +209,11 @@ body {
 }
 
 .item {
-    
+    padding: 5px;
+}
+
+.item p {
+    display: block;
 }
 
 /* CALENDAR */
