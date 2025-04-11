@@ -141,6 +141,11 @@ function setupDaysGlobal() {
     }
 }
 
+//this will be used to load data from database into each day
+function loadItems() {
+    itemsForDays[new Date().getDate() - 1] = new Event("Meeting", "Test Meeting", "red", "Test Location", BUILDING HERE)
+}
+
 function findDay() {
     let date = document.getElementById("taskBarHeaderDay").innerHTML;
     let dayRE = /\w+,\s\w+\s(\d{1,2}),/i;
