@@ -127,7 +127,7 @@ function setupTaskCreationFormControls() {
         document.getElementById("taskOptions").className = "hidden";
         toggleTaskMenuVisibility();
         document.getElementById("addTaskButton").disabled = false;
-        buildItemView(findDay() - 1);
+        displayItems(findDay());
     })
 }
 
@@ -188,16 +188,12 @@ function generateNewTask() {
 
 //NOW NEED TO SHOW THE TASKS/EVENTS FOR THE SELECTED DAY
 //IF NO TASKS, SAY NO TASKS with like a message or something
+//--update: started, items display for each day on taskbar
 
 //SHOW TASKS/EVENTS ON CALENDAR
 
 //ALSO, CHECK THAT REQUIRED FORM ELEMENTS PROHIBIT SUBMISSION UNTIL FILLED IN
 // SPOILER: I DON'T THINK THEY DO THAT, SO THERE CAN BE NULL VALUES 
-
-//weird bug in itemCreation that says non visible elements should be filled in
-//like task elements shouldnt be null when making an event item
-//--update: been thinking about this, i think when radio button is selected, the newly displayed elements can be set to required while
-//            the hidden elements lose the required attribute. (even though the elements aren't visible, i think the browser is still expecting them)
 
 //DROP DOWN BUTTONS FOR VIEW, MONTH, YEAR
 // this is next to calendar so user can change to like a weekly (or even daily) view, and can change the month/year
@@ -231,3 +227,10 @@ function generateNewTask() {
 //              i dont know if this matters, the priority menu might change later if i can come up with a custom radio button
 //--update: item creation has been styled and is in a solid spot for now!
 //---- LEAVING FOR REFERENCE
+
+//FIXED NOW
+//weird bug in itemCreation that says non visible elements should be filled in
+//like task elements shouldnt be null when making an event item
+//--update: been thinking about this, i think when radio button is selected, the newly displayed elements can be set to required while
+//            the hidden elements lose the required attribute. (even though the elements aren't visible, i think the browser is still expecting them)
+//RESOLVED WITH TOGGLEFORMFIELD FUNCTION
