@@ -34,6 +34,7 @@ class Task extends Item {
         super(title, desc, color);
         this.priority = priority;
         this.deadline = deadline;
+        this.type = "task";
     }
 }
 
@@ -43,6 +44,7 @@ class Event extends Item {
         this.location = location;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.type = "event";
     }
 }
 
@@ -66,10 +68,21 @@ function toggleTaskMenuVisibility() {
     if (currentTasks.style.display === "" || currentTasks.style.display === "block") {
         currentTasks.style.display = "none";
         taskCreationMenu.style.display = "block";
+        toggleFormFields(taskCreationMenu, true);
+        toggleFormFields(currentTasks, false);
     } else {
         currentTasks.style.display = "block";
         taskCreationMenu.style.display = "none";
+        toggleFormFields(taskCreationMenu, false);
+        toggleFormFields(currentTasks, true);
     }
+}
+
+function toggleFormFields(container, enable) {
+    const fields = container.querySelectorAll("input, textarea, select, button");
+    fields.forEach(function(i) {
+        i.disabled = !enable;
+    });
 }
 
 function setupItemType() {
@@ -114,6 +127,7 @@ function setupTaskCreationFormControls() {
         document.getElementById("taskOptions").className = "hidden";
         toggleTaskMenuVisibility();
         document.getElementById("addTaskButton").disabled = false;
+        buildItemView(findDay() - 1);
     })
 }
 
@@ -165,25 +179,12 @@ function generateNewTask() {
     }
 
     itemsForDays[day].push(newItem);
-    console.log(itemsForDays[day]);
+    console.log(newItem.type);
+    // console.log(itemsForDays[day]);
 }
-
-//SHOULD BE DONE NOW ----
-//working on making the data structures for the tasks/events
-//there should be a day data structure that holds a list of tasks/events
-//it should be in a list
-//when a day is selected, the list[day] should be displayed in the div
-//---- LEAVING FOR REFERENCE (REMOVE IF DETERMINED UNNEEDED)
 
 //-------------
 //TO DO:
-
-//STYLE THE TASK CREATION MENU
-//--update: getting closer, just got the layout for the event and task submenus
-//              did notice that the priority is off by a few pixels on the task side
-//              i dont know if this matters, the priority menu might change later if i can come up with a custom radio button
-
-//ADD RECURRING TO EVENTS/TASKS
 
 //NOW NEED TO SHOW THE TASKS/EVENTS FOR THE SELECTED DAY
 //IF NO TASKS, SAY NO TASKS with like a message or something
@@ -195,12 +196,15 @@ function generateNewTask() {
 
 //weird bug in itemCreation that says non visible elements should be filled in
 //like task elements shouldnt be null when making an event item
+//--update: been thinking about this, i think when radio button is selected, the newly displayed elements can be set to required while
+//            the hidden elements lose the required attribute. (even though the elements aren't visible, i think the browser is still expecting them)
 
 //DROP DOWN BUTTONS FOR VIEW, MONTH, YEAR
 // this is next to calendar so user can change to like a weekly (or even daily) view, and can change the month/year
 
-//------------
+//ADD RECURRING TO EVENTS/TASKS
 
+//------------
 //BACKBURNER:
 
 //uh, add color options to the event/task creation menu
@@ -211,3 +215,19 @@ function generateNewTask() {
 //--update: i think that instead of selection list, customized radio buttons could be used instead 
 
 //------------
+//COMPLETED:
+
+//SHOULD BE DONE NOW ----
+//working on making the data structures for the tasks/events
+//there should be a day data structure that holds a list of tasks/events
+//it should be in a list
+//when a day is selected, the list[day] should be displayed in the div
+//---- LEAVING FOR REFERENCE (REMOVE IF DETERMINED UNNEEDED)
+
+//FINISHED FOR NOW
+//STYLE THE TASK CREATION MENU
+//--update: getting closer, just got the layout for the event and task submenus
+//              did notice that the priority is off by a few pixels on the task side
+//              i dont know if this matters, the priority menu might change later if i can come up with a custom radio button
+//--update: item creation has been styled and is in a solid spot for now!
+//---- LEAVING FOR REFERENCE
