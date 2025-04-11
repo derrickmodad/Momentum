@@ -143,7 +143,7 @@ function setupDaysGlobal() {
 
 //this will be used to load data from database into each day
 function loadItems() {
-    itemsForDays[new Date().getDate() - 1] = new Event("Meeting", "Test Meeting", "red", "Test Location", BUILDING HERE)
+    //itemsForDays[new Date().getDate() - 1] = new Event("Meeting", "Test Meeting", "red", "Test Location", BUILDING HERE)
 }
 
 function findDay() {
