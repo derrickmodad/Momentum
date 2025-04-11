@@ -77,4 +77,57 @@ function focusDay(day) {
 
     dateForHeader = dateForHeader.toLocaleDateString(navigator.language, options);
     header.innerHTML = dateForHeader; 
+
+    displayItems(day);
 }
+
+function displayItems(day) {
+    let itemDiv = document.getElementById("itemsForDay");
+    if (itemDiv.childElementCount !== 0) {
+        itemDiv.innerHTML = "";
+    }
+    if (itemsForDays[day - 1].length === 0) {
+        let div = document.createElement("div");
+        let inner = document.createElement("h3");
+        inner.innerHTML = "No items for today";
+        div.appendChild(inner);
+        div.id = "itemsForDayInner";
+        itemDiv.appendChild(div);
+    } else {
+        buildItemView(day);
+    }
+}
+
+function buildItemView(day) {
+    let items = itemsForDays[day - 1];
+    let mainItemDiv = document.getElementById("itemsForDay");
+    for (let i = 0; i < items.length; i++) {
+        let itemDiv = document.createElement("div");
+        itemDiv.id = "item" + i;
+        itemDiv.className = "item";
+        itemDiv.innerHTML += items[i].title;
+        itemDiv.innerHTML += items[i].desc;
+        itemDiv.innerHTML += items[i].color;
+        if (items[i].type == "task") {
+            //priority, deadline
+            itemDiv.innerHTML += items[i].priority;
+            itemDiv.innerHTML += items[i].deadline;
+        } else {
+            //location, startTime, endTime
+            itemDiv.innerHTML += items[i].location;
+            itemDiv.innerHTML += items[i].startTime;
+            itemDiv.innerHTML += items[i].endTime;
+        }
+        mainItemDiv.appendChild(itemDiv);
+    }
+}
+
+/*
+
+--------------
+|  |         |
+|  |         |
+--------------
+
+div structure? color on left, info about item on right
+*/
