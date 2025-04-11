@@ -6,7 +6,6 @@ function buildCalendar() {
     let calendar = document.getElementById("calendar");
     let today = new Date();
     let numDaysInMonth = getDaysInMonth(today.getFullYear(), today.getMonth());
-    
     let generatedCalendar = document.createElement("table");
     generatedCalendar.id = "generatedCalendar";
 
@@ -105,18 +104,48 @@ function buildItemView(day) {
         let itemDiv = document.createElement("div");
         itemDiv.id = "item" + i;
         itemDiv.className = "item";
-        itemDiv.innerHTML += items[i].title;
-        itemDiv.innerHTML += items[i].desc;
-        itemDiv.innerHTML += items[i].color;
+        
+        // itemDiv.innerHTML += items[i].title;
+        let item = document.createElement("h3");
+        item.innerHTML = items[i].title;
+        itemDiv.appendChild(item);
+
+        // itemDiv.innerHTML += items[i].desc;
+        item = document.createElement("p");
+        item.innerHTML = items[i].desc;
+        itemDiv.appendChild(item);
+        
+        
+        // itemDiv.innerHTML += items[i].color;
+        itemDiv.classList.add(items[i].color);
+
         if (items[i].type == "task") {
             //priority, deadline
-            itemDiv.innerHTML += items[i].priority;
-            itemDiv.innerHTML += items[i].deadline;
+            // itemDiv.innerHTML += items[i].priority;
+            item = document.createElement("p");
+            item.innerHTML = "Priority: " + items[i].priority;
+            itemDiv.appendChild(item);
+
+            // itemDiv.innerHTML += items[i].deadline;
+            item = document.createElement("p");
+            item.innerHTML = "Deadline: " + items[i].deadline;
+            itemDiv.appendChild(item);
         } else {
             //location, startTime, endTime
-            itemDiv.innerHTML += items[i].location;
-            itemDiv.innerHTML += items[i].startTime;
-            itemDiv.innerHTML += items[i].endTime;
+            // itemDiv.innerHTML += items[i].location;
+            item = document.createElement("p");
+            item.innerHTML = items[i].location;
+            itemDiv.appendChild(item);
+
+            // itemDiv.innerHTML += items[i].startTime;
+            item = document.createElement("p");
+            item.innerHTML = "Start: " + items[i].startTime;
+            itemDiv.appendChild(item);
+
+            // itemDiv.innerHTML += items[i].endTime;
+            item = document.createElement("p");
+            item.innerHTML = "End: " + items[i].endTime;
+            itemDiv.appendChild(item);
         }
         mainItemDiv.appendChild(itemDiv);
     }
