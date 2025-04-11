@@ -200,6 +200,18 @@ body {
     color: black;
 }
 
+/* DISPLAY TASKS */
+
+#itemsForDayInner {
+    text-align: center;
+    color: rgb(169, 169, 169);
+    padding: 10%;
+}
+
+.item {
+    
+}
+
 /* CALENDAR */
 
 .calendarCell {
