@@ -101,52 +101,86 @@ function buildItemView(day) {
     let items = itemsForDays[day - 1];
     let mainItemDiv = document.getElementById("itemsForDay");
     for (let i = 0; i < items.length; i++) {
+        
+        //divs for structure
         let itemDiv = document.createElement("div");
         itemDiv.id = "item" + i;
-        itemDiv.className = "item";
-        
-        // itemDiv.innerHTML += items[i].title;
-        let item = document.createElement("h3");
-        item.innerHTML = items[i].title;
-        itemDiv.appendChild(item);
+        itemDiv.className = "itemDiv";
 
-        // itemDiv.innerHTML += items[i].desc;
-        item = document.createElement("p");
-        item.innerHTML = items[i].desc;
-        itemDiv.appendChild(item);
+        let left = document.createElement("div");
+        left.className = "itemDivLeft";
+
+        let right = document.createElement("div");
+        right.className = "itemDivRight";
+
+        let upperRight = document.createElement("div");
+        upperRight.className = "itemDivRightUpperRight";
+
+        let lowerRight = document.createElement("div");
+        lowerRight.className = "itemDivRightLowerRight";
         
+        //add title to upperRight div
+        let title = document.createElement("h3");
+        title.innerHTML = items[i].title;
+        upperRight.appendChild(title);
+
+        //add desc to bottom right
+        let desc = document.createElement("p");
+        desc.innerHTML = items[i].desc;
+        lowerRight.appendChild(desc);
         
-        // itemDiv.innerHTML += items[i].color;
-        itemDiv.classList.add(items[i].color);
+        //give left div color
+        //left.classList.add(items[i].color);
+        left.style.backgroundColor = items[i].color;
 
         if (items[i].type == "task") {
             //priority, deadline
-            // itemDiv.innerHTML += items[i].priority;
-            item = document.createElement("p");
-            item.innerHTML = "Priority: " + items[i].priority;
-            itemDiv.appendChild(item);
+            
+            //add priority to upperRight div
+            let prio = document.createElement("p");
+            prio.innerHTML = "Priority: " + items[i].priority;
+            upperRight.appendChild(prio);
 
-            // itemDiv.innerHTML += items[i].deadline;
-            item = document.createElement("p");
-            item.innerHTML = "Deadline: " + items[i].deadline;
-            itemDiv.appendChild(item);
+            //add image to left div
+            // let taskImg = document.createElement("img");
+            // taskImg.src = "images/taskImage.png";
+            // taskImg.className = "itemImgScaleDown";
+            // left.appendChild(taskImg);
+
+            //add deadline to left div
+            let deadline = document.createElement("p");
+            deadline.innerHTML = "Deadline: " + items[i].deadline;
+            left.appendChild(deadline);
         } else {
             //location, startTime, endTime
-            // itemDiv.innerHTML += items[i].location;
-            item = document.createElement("p");
-            item.innerHTML = items[i].location;
-            itemDiv.appendChild(item);
 
-            // itemDiv.innerHTML += items[i].startTime;
-            item = document.createElement("p");
-            item.innerHTML = "Start: " + items[i].startTime;
-            itemDiv.appendChild(item);
+            //add location to upperRight div
+            let location = document.createElement("p");
+            location.innerHTML = items[i].location;
+            upperRight.appendChild(location);
 
-            // itemDiv.innerHTML += items[i].endTime;
-            item = document.createElement("p");
-            item.innerHTML = "End: " + items[i].endTime;
-            itemDiv.appendChild(item);
+            //add start to left div
+            let start = document.createElement("p");
+            start.innerHTML = "Start: " + items[i].startTime;
+            left.appendChild(start);
+
+            //add image to left div
+            // let eventImg = document.createElement("img");
+            // eventImg.src = "images/eventImage.png";
+            // eventImg.className = "itemImgScaleDown";
+            // left.appendChild(eventImg);
+
+            //add end to left div
+            let end = document.createElement("p");
+            end.innerHTML = "End: " + items[i].endTime;
+            left.appendChild(end);
         }
+
+        //build the item
+        right.appendChild(upperRight);
+        right.appendChild(lowerRight);
+        itemDiv.appendChild(left);
+        itemDiv.appendChild(right);
         mainItemDiv.appendChild(itemDiv);
     }
 }
@@ -159,4 +193,17 @@ function buildItemView(day) {
 --------------
 
 div structure? color on left, info about item on right
+
+structure for items:
+
+div id='itemDiv'
+    div id='left' color=passed color from form
+        p id='start'
+        p id='end/deadline'
+    div id='right'
+        div id='upper'
+            h3 id='title'
+            p id='location/priority'
+        div id='lower'
+            p id='desc'
 */
