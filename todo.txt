@@ -10,7 +10,7 @@
 //                  (started this with the images, but the task image is wack - wip)
 
 //---IN PROGRESS
-//SHOW TASKS/EVENTS ON CALENDAR
+//SHOW TASKS/EVENTS ON CALENDAR    -Thomas
 //show max 5? the rest get condensed into like (+10 More) maybe
 //  this is to condense the view and make it more digestable
 //--update: shows each event/task for each day, may be condensed as stated above
