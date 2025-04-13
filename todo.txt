@@ -5,6 +5,8 @@
 //IF NO TASKS, SAY NO TASKS with like a message or something
 //--update: started, items display for each day on taskbar
 
+//SORT ITEMS BY TIME
+
 //SYSTEM FOR COMPLETING EVENT/TASK
 //WHEN USER CLICKS, MOVE ITEM TO COMPLETED SECTION AT BOTTOM
 //MAY NEED A FINISHED FLAG IN ITEM CLASS FOR THIS
