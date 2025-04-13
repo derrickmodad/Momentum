@@ -255,9 +255,17 @@ body {
     transition: 0.1s;
 }
 
-.calendarCellActive {
+/* .calendarCellActive {
     background-color: rgb(50, 115, 255);
     color: white;
+} */
+
+.currentDayNumberStyle {
+    background-color: rgb(50, 115, 255);
+    color: white;
+    border-radius: 50%;
+    width: 1em;
+    padding: 0.2em;
 }
 
 .calendarItem {
