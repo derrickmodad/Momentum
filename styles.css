@@ -259,3 +259,8 @@ body {
     background-color: rgb(50, 115, 255);
     color: white;
 }
+
+.calendarItem {
+    border-radius: 10px;
+    padding-left: 0.5em;
+}

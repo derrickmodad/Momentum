@@ -94,6 +94,7 @@ function displayItems(day) {
         itemDiv.appendChild(div);
     } else {
         buildItemView(day);
+        buildItemViewCalendar(day);
     }
 }
 
@@ -183,6 +184,27 @@ function buildItemView(day) {
         itemDiv.appendChild(right);
         mainItemDiv.appendChild(itemDiv);
     }
+}
+
+function buildItemViewCalendar(day) {
+    let calDay = document.getElementById("calendarDay" + day);
+    let items = itemsForDays[day - 1];
+
+    calDay.innerHTML = "";
+    calDay.innerHTML = day;
+
+    let outerDiv = document.createElement("div");
+    for (let i = 0; i < items.length; i++) {
+        let item = document.createElement("div");
+        let title = document.createElement("p");
+        title.innerHTML = items[i].title;
+        item.appendChild(title);
+        item.style.backgroundColor = items[i].color;
+        item.className = "calendarItem";
+        outerDiv.appendChild(item);
+    }
+
+    calDay.appendChild(outerDiv);
 }
 
 /*
