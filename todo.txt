@@ -1,9 +1,19 @@
 //-------------
 //TO DO:
 
+//---IN PROGRESS
 //NOW NEED TO SHOW THE TASKS/EVENTS FOR THE SELECTED DAY
 //IF NO TASKS, SAY NO TASKS with like a message or something
 //--update: started, items display for each day on taskbar
+//--update: events/tasks show for each day on taskbar, styling is pretty good
+//              i think there should be an image for users to easily differentiate between tasks and events
+//                  (started this with the images, but the task image is wack - wip)
+
+//---IN PROGRESS
+//SHOW TASKS/EVENTS ON CALENDAR
+//show max 5? the rest get condensed into like (+10 More) maybe
+//  this is to condense the view and make it more digestable
+//--update: shows each event/task for each day, may be condensed as stated above
 
 //SORT ITEMS BY TIME
 
@@ -16,17 +26,16 @@
 //WHEN USER CLICKS, FORM NEEDS TO BE REOPENED WITH INFO AUTOFILLED 
 //  SO USER CAN EDIT
 
-//SHOW TASKS/EVENTS ON CALENDAR
-
 //ALSO, CHECK THAT REQUIRED FORM ELEMENTS PROHIBIT SUBMISSION UNTIL FILLED IN
 // SPOILER: I DON'T THINK THEY DO THAT, SO THERE CAN BE NULL VALUES 
+
+//VALIDATE TIME FOR EVENTS (SHOULDN'T BE ABLE TO SET START TIME AFTER END TIME)
 
 //DROP DOWN BUTTONS FOR VIEW, MONTH, YEAR
 // this is next to calendar so user can change to like a weekly (or even daily) view, and can change the month/year
 
 //ADD RECURRING TO EVENTS/TASKS
 
-//VALIDATE TIME FOR EVENTS (SHOULDN'T BE ABLE TO SET START TIME AFTER END TIME)
 
 //------------
 //BACKBURNER:
