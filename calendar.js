@@ -56,10 +56,20 @@ function buildCalendar() {
     }
 
     calendar.appendChild(generatedCalendar);
+    styleCurrentDay(today);
 }
 
 function getDaysInMonth(year, month) {
     return new Date(year, month + 1, 0).getDate();
+}
+
+function styleCurrentDay(day) {
+    let calDay = document.getElementById("calendarDay" + day);
+    calDay.innerHTML = "";
+    let dayDiv = document.createElement("div");
+    dayDiv.innerHTML = day;
+    dayDiv.className = "currentDayNumberStyle";
+    calDay.appendChild(dayDiv);
 }
 
 function focusDay(day) {
@@ -133,6 +143,7 @@ function buildItemView(day) {
         //give left div color
         //left.classList.add(items[i].color);
         left.style.backgroundColor = items[i].color;
+        left.style.color = determineTextColor(items[i].color);
 
         if (items[i].type == "task") {
             //priority, deadline
@@ -193,6 +204,11 @@ function buildItemViewCalendar(day) {
     calDay.innerHTML = "";
     calDay.innerHTML = day;
 
+    //if calendar cell is current day
+    if (calDay.classList.contains("calendarCellActive")) {
+        styleCurrentDay(day);
+    }
+
     let outerDiv = document.createElement("div");
     for (let i = 0; i < items.length; i++) {
         let item = document.createElement("div");
@@ -200,11 +216,38 @@ function buildItemViewCalendar(day) {
         title.innerHTML = items[i].title;
         item.appendChild(title);
         item.style.backgroundColor = items[i].color;
+        item.style.color = determineTextColor(items[i].color);
         item.className = "calendarItem";
         outerDiv.appendChild(item);
     }
 
     calDay.appendChild(outerDiv);
+}
+
+function determineTextColor(bgc) {
+    switch (bgc) {
+        case "red":
+            return "black";
+            break;
+        case "orange":
+            return "black";
+            break;
+        case "yellow":
+            return "black";
+            break;
+        case "green":
+            return "white";
+            break;
+        case "blue":
+            return "white";
+            break;
+        case "purple":
+            return "white";
+            break;
+        case "gray":
+            return "black";
+            break;
+    }
 }
 
 /*
