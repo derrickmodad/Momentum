@@ -1,1 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+    <script src="task.js" defer></script>
+    <script src="calendar.js" defer></script>
+    <title>Momentum</title>
+</head>
+<body>
+    <div id="leftMain">
+        <div id="upperLeft">
+            <div id="header">
+                <p>placeholder</p>
+                <p>placeholder</p>
+            </div>
+        </div>
+        <div id="bottomLeft">
+            <div id="mainBody">
+                <div id="calendar"></div>
+            </div>
+        </div>
+    </div>
+    <div id="rightMain">
+        <div id="taskBar">
+            <div id="taskBarHeader">
+                <h1 id="taskBarHeaderDay">Today</h1>
+                <button id="addTaskButton">Add Item</button>
+            </div>
+            <div id="taskBarBody">
+                <div id="currentTasks">
+                    <h2>Upcoming</h2>
+                    <div id="itemsForDay"></div>
+                </div>
+                <div id="taskCreation" class="hidden">
+                    <h2>Add Item</h2>
+                    <form id="addTask">
+                        <div id="itemInformation" class="subItemInfo">
+                            <div id="itemInformationInner" class="comboOptionsInner">
+                                <fieldset>
+                                    <legend>Overview</legend>
+                                    <div class="formRow">
+                                        <label for="titleOfItem">Title:</label>
+                                        <input type="text" name="titleOfItem" id="titleOfItem" required>
+                                    </div>
+                                    <div class="formRow">
+                                        <label for="descriptionOfItem">Description:</label>
+                                        <textarea name="descriptionOfItem" id="descriptionOfItem" rows="4"></textarea>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div id="colorSelection" class="subItemInfo">
+                            <select name="itemColorOption" id="itemColorOption" required>
+                                <option value="placeholder" disabled selected>Color</option>
+                                <option value="red" id="colorOptionRed" class="colorOption">Red</option>
+                                <option value="orange" id="colorOptionOrange" class="colorOption">Orange</option>
+                                <option value="yellow" id="colorOptionYellow" class="colorOption">Yellow</option>
+                                <option value="green" id="colorOptionGreen" class="colorOption">Green</option>
+                                <option value="blue" id="colorOptionBlue" class="colorOption">Blue</option>
+                                <option value="purple" id="colorOptionPurple" class="colorOption">Purple</option>
+                                <option value="gray" id="colorOptionGray" class="colorOption">Gray</option>
+                            </select>
+                        </div>
+                        <div class="subItemInfo">
+                            <div class="comboOptionsInner">
+                                <div id="itemTypeSelection">
+                                    <div id="itemTypeSelectionInner">
+                                        <input type="radio" name="itemType" class="itemTypeRadioButton" id="eventSelectButton" value="Event" required>
+                                        <label for="eventSelectButton">Event</label>
+                                        <input type="radio" name="itemType" class="itemTypeRadioButton" id="taskSelectButton" value="Task">
+                                        <label for="taskSelectButton">Task</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="eventOptions" class="hidden">
+                            <div id="eventOptionsInner" class="comboOptionsInner">
+                                <fieldset>
+                                    <legend>Event Information</legend>
+                                    <div class="formRow">
+                                        <label for="eventLocation">Location:</label>
+                                        <input type="text" id="eventLocation" name="eventLocation" required>
+                                    </div>
+                                    <div class="formRow">
+                                        <label for="eventStartTime">Start Time:</label>
+                                        <input type="time" id="eventStartTime" name="eventStartTime" required>
+                                    </div>
+                                    <div class="formRow">
+                                        <label for="eventEndTime">End Time:</label>
+                                        <input type="time" id="eventEndTime" name="eventEndTime" required>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div id="taskOptions" class="hidden">
+                            <div id="taskOptionsInner" class="comboOptionsInner">
+                                <fieldset>
+                                    <legend>Task Information</legend>
+                                    <div class="formRow">
+                                        <label for="taskPriority">Priority:</label>
+                                        <select id="taskPriority" name="taskPriority" required>
+                                            <option>Low</option>
+                                            <option>Medium</option>
+                                            <option>High</option>
+                                        </select>
+                                    </div>
+                                    <div class="formRow">
+                                        <label for="taskDeadline">Deadline:</label>
+                                        <input type="time" id="taskDeadline" name="taskDeadline" required>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div id="addTaskFormControl" class="subItemInfo">
+                            <button type="button" id="cancelTaskCreation" class="formControlButton">Cancel</button>
+                            <button type="submit" id="finishTaskCreation" class="formControlButton">Finish</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
 
+<!--
+
+    so my thoughts are to make a layout like this:
+    _______________________  _______
+    |        header       |  |     |
+    -----------------------  |task |
+    _______________________  |  bar|
+    |                     |  |     |
+    |       calendar      |  |     |
+    |                     |  |     |
+    |                     |  |     |
+    |                     |  |     |
+    -----------------------  -------
+-->

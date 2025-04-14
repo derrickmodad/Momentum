@@ -1,1 +1,274 @@
+body {
+    background-color: rgb(93, 92, 92);
+    display: flex;
+}
 
+#leftMain {
+    width: 70%;
+    padding-right: 5px;
+    display: block;
+}
+
+#leftMain > #upperLeft {
+    padding-bottom: 5px;
+}
+
+#leftMain > #bottomLeft {
+    padding-top: 5px;
+}
+
+#rightMain {
+    width: 30%;
+    padding-left: 5px;
+    display: flex;
+}
+
+#header {
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    padding: 1%;
+}
+
+#header > p + p {
+    margin-left: 2%;
+}
+
+#mainBody {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1%;
+    text-align: center;
+}
+
+#taskBar {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1%;
+    width: 100%;
+}
+
+#taskBarHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ITEM CREATION */
+
+#taskBarHeader > #addTaskButton {
+    border-radius: 10px;
+    padding: 1em;
+    background-color: rgb(0, 0, 0);
+    color: white;
+}
+
+#taskBarHeader > #addTaskButton:disabled {
+    background-color: rgb(136, 136, 136);
+    color: rgb(92, 92, 92);
+    pointer-events: none;
+}
+
+#taskBarHeader > #addTaskButton:hover {
+    cursor: pointer;
+    background-color: rgb(255, 255, 255);
+    color: black;
+    transition: 0.1s;
+}
+
+#addTask {
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 0.2em;
+}
+
+.subItemInfo {
+    padding: 1em;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* ITEM TYPE SELECTION */
+
+#itemTypeSelection {
+    display: flex;
+    justify-content: center;
+}
+
+#itemTypeSelectionInner {
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    gap: 10px;
+}
+  
+#itemTypeSelectionInner input {
+    display: none;
+}
+  
+#itemTypeSelectionInner label {
+    padding: 0.5em 1em;
+    border: 2px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+    background-color: white;
+    color: black;
+    transition: 0.2s;
+    width: 50%;
+}
+  
+#itemTypeSelectionInner input[type="radio"]:checked + label{
+    background-color: black;
+    color: white;
+    width: 150%;
+}
+
+/* END ITEM TYPE SELECTION */
+
+.hidden {
+    display: none;
+    transition: 0.5s ease-in-out;
+}
+
+.comboOptionsInner {
+    width: 100%;
+}
+
+.comboOptionsInner > fieldset {
+    border-radius: 10px;
+}
+
+.formRow {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.9em;
+    margin-top: 0.4em;
+}
+
+.formRow label {
+    width: auto; 
+    margin-right: 1em;
+    flex: 0.3;
+    text-align: right;
+}
+
+.formRow input {
+    flex: 0.7; 
+    padding: 0.5em;
+}
+
+.formRow textarea {
+    flex: 0.7;
+    padding: 0.5em;
+    font-family: sans-serif;
+}
+
+.formRow select {
+    flex: 0.7;
+    padding: 0.5em;
+}
+
+.formControlButton {
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    padding: 1em;
+}
+
+.formControlButton:hover {
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+#cancelTaskCreation:hover {
+    background-color: red;
+    color: black;
+}
+
+#finishTaskCreation:hover {
+    background-color: rgb(0, 227, 0);
+    color: black;
+}
+
+/* DISPLAY TASKS */
+
+#itemsForDayInner {
+    text-align: center;
+    color: rgb(169, 169, 169);
+    padding: 10%;
+}
+
+.itemDiv {
+    display: flex;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+.itemDivLeft {
+    border-radius: 8px;
+    flex: 0.2;
+    display: block;
+    text-align: center;
+    color: white;
+}
+
+.itemImgScaleDown {
+    width: 40%;
+}
+
+.itemDivRight {
+    flex: 0.8;
+}
+
+.itemDivRightUpperRight {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 1em;
+    margin-left: 0.5em;
+    align-items: center;
+}
+
+.itemDivRightLowerRight {
+    margin-left: 1em;
+}
+
+/* CALENDAR */
+
+.calendarCell {
+    width: 8.5em;
+    height: 8.5em;
+    border: 1px solid #ccc;
+    position: relative;
+    padding: 0.5em;
+    text-align: left;
+    vertical-align: top;
+}
+
+.calendarCell:hover {
+    background-color: #ccc;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+/* .calendarCellActive {
+    background-color: rgb(50, 115, 255);
+    color: white;
+} */
+
+.currentDayNumberStyle {
+    background-color: rgb(50, 115, 255);
+    color: white;
+    border-radius: 50%;
+    width: 1em;
+    padding: 0.2em;
+}
+
+.calendarItem {
+    border-radius: 10px;
+    padding-left: 0.5em;
+}
