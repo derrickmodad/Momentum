@@ -8,6 +8,7 @@
 //--update: events/tasks show for each day on taskbar, styling is pretty good
 //              i think there should be an image for users to easily differentiate between tasks and events
 //                  (started this with the images, but the task image is wack - wip)
+//              --maybe instead of images, it's just a word in like a pill shape?
 
 //---IN PROGRESS
 //SHOW TASKS/EVENTS ON CALENDAR    -Thomas
