@@ -16,6 +16,7 @@
 //--update: shows each event/task for each day, may be condensed as stated above
 
 //SORT ITEMS BY TIME
+//  if tasks have same deadline, sort by priority
 
 //SYSTEM FOR COMPLETING EVENT/TASK -Derrick
 //WHEN USER CLICKS, MOVE ITEM TO COMPLETED SECTION AT BOTTOM
