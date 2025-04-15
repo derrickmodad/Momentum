@@ -139,6 +139,14 @@ function buildItemView(day) {
         let desc = document.createElement("p");
         desc.innerHTML = items[i].desc;
         lowerRight.appendChild(desc);
+
+        let editButton = document.createElement("button");
+        editButton.className = "itemEditButton";
+        editButton.onclick = function() {
+            editItem(i, day);
+        }
+        editButton.innerHTML = "Edit";
+        lowerRight.appendChild(editButton);
         
         //give left div color
         //left.classList.add(items[i].color);
