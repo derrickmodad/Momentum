@@ -40,6 +40,10 @@
 
 //ADD STYLE FOR SELECTED DAY (DIFFERENT FROM CURRENT/ACTIVE DAY, THIS IS WHEN USER CLICKS A DAY TO SEE AND ADD ITEMS)
 
+//found bug with edit feature
+//when user edits item and selects a different day than what the item was originally,
+//  the item stays visible on the calendar on the old day and a new version appears on new day
+
 //------------
 //BACKBURNER:
 
