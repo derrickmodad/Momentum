@@ -20,6 +20,7 @@
  */
 
 let itemsForDays = [];
+let currentlyEditing = null;
 
 class Item {
     constructor(title, desc, color) {
@@ -88,21 +89,23 @@ function toggleFormFields(container, enable) {
 function setupItemType() {
     let eventRadio = document.getElementById("eventSelectButton");
     let taskRadio = document.getElementById("taskSelectButton");
+    eventRadio.addEventListener("change", updateVisibility);
+    taskRadio.addEventListener("change", updateVisibility);
+}
+
+function updateVisibility() {
+    let eventRadio = document.getElementById("eventSelectButton");
+    let taskRadio = document.getElementById("taskSelectButton");
     let eventOptions = document.getElementById("eventOptions");
     let taskOptions = document.getElementById("taskOptions");
 
-    function updateVisibility() {
-        if (eventRadio.checked) {
-            eventOptions.className = "subItemInfo";
-            taskOptions.className = "hidden";
-        } else if (taskRadio.checked) {
-            eventOptions.className = "hidden";
-            taskOptions.className = "subItemInfo";
-        }
+    if (eventRadio.checked) {
+        eventOptions.className = "subItemInfo";
+        taskOptions.className = "hidden";
+    } else if (taskRadio.checked) {
+        eventOptions.className = "hidden";
+        taskOptions.className = "subItemInfo";
     }
-
-    eventRadio.addEventListener("change", updateVisibility);
-    taskRadio.addEventListener("change", updateVisibility);
 }
 
 function setupTaskCreationFormControls() {
@@ -116,11 +119,16 @@ function setupTaskCreationFormControls() {
         document.getElementById("taskOptions").className = "hidden";
         toggleTaskMenuVisibility();
         document.getElementById("addTaskButton").disabled = false;
+        currentlyEditing = null;
     });
 
     //finish button
     let finish = document.getElementById("finishTaskCreation");
     finish.addEventListener("click", function() {
+        if (currentlyEditing !== null) {
+            itemsForDays[currentlyEditing.day].splice(currentlyEditing.it, 1);
+            currentlyEditing = null;
+        }
         generateNewTask();
         form.reset();
         document.getElementById("eventOptions").className = "hidden";
@@ -128,7 +136,7 @@ function setupTaskCreationFormControls() {
         toggleTaskMenuVisibility();
         document.getElementById("addTaskButton").disabled = false;
         displayItems(findDay());
-    })
+    });
 }
 
 //sets up the global array that holds items for each day
@@ -186,4 +194,34 @@ function generateNewTask() {
     itemsForDays[day].push(newItem);
     console.log(newItem.type);
     // console.log(itemsForDays[day]);
+}
+
+function editItem(it, day) {
+    day -= 1;
+    let item = itemsForDays[day][it]
+    // console.log(itemsForDays[day][item]);
+    toggleTaskMenuVisibility();
+    sideLoadForm(item);
+    currentlyEditing = {it, day};
+}
+
+function sideLoadForm(item) {
+    let form = document.getElementById("addTask");
+    form.elements.titleOfItem.value = item.title;
+    form.elements.descriptionOfItem.value = item.desc;
+    form.elements.itemColorOption.value = item.color;
+    if (item.type === "event") {
+        let eventButton = document.getElementById("eventSelectButton");
+        eventButton.checked = true;
+        updateVisibility();
+        form.elements.eventLocation.value = item.location;
+        form.elements.eventStartTime.value = item.startTime;
+        form.elements.eventEndTime.value = item.endTime;
+    } else {
+        let taskButton = document.getElementById("taskSelectButton");
+        taskButton.checked = true;
+        updateVisibility();
+        form.elements.taskPriority.value = item.priority; 
+        form.elements.taskDeadline.value = item.deadline;
+    }
 }
