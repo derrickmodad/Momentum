@@ -132,12 +132,12 @@ function buildItemView(day) {
         
         //add title to upperRight div
         let title = document.createElement("h3");
-        title.innerHTML = items[i].title;
+        title.textContent = items[i].title;
         upperRight.appendChild(title);
 
         //add desc to bottom right
         let desc = document.createElement("p");
-        desc.innerHTML = items[i].desc;
+        desc.textContent = items[i].desc;
         lowerRight.appendChild(desc);
 
         let editButton = document.createElement("button");
@@ -158,7 +158,7 @@ function buildItemView(day) {
             
             //add priority to upperRight div
             let prio = document.createElement("p");
-            prio.innerHTML = "Priority: " + items[i].priority;
+            prio.textContent = "Priority: " + items[i].priority;
             upperRight.appendChild(prio);
 
             //add image to left div
@@ -169,19 +169,19 @@ function buildItemView(day) {
 
             //add deadline to left div
             let deadline = document.createElement("p");
-            deadline.innerHTML = "Deadline: " + items[i].deadline;
+            deadline.textContent = "Deadline: " + items[i].deadline;
             left.appendChild(deadline);
         } else {
             //location, startTime, endTime
 
             //add location to upperRight div
             let location = document.createElement("p");
-            location.innerHTML = items[i].location;
+            location.textContent = items[i].location;
             upperRight.appendChild(location);
 
             //add start to left div
             let start = document.createElement("p");
-            start.innerHTML = "Start: " + items[i].startTime;
+            start.textContent = "Start: " + items[i].startTime;
             left.appendChild(start);
 
             //add image to left div
@@ -192,7 +192,7 @@ function buildItemView(day) {
 
             //add end to left div
             let end = document.createElement("p");
-            end.innerHTML = "End: " + items[i].endTime;
+            end.textContent = "End: " + items[i].endTime;
             left.appendChild(end);
         }
 
