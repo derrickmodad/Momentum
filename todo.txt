@@ -49,6 +49,10 @@
 //  
 //--update: i think that instead of selection list, customized radio buttons could be used instead 
 
+//potential feature:
+//hover over collapsed days to show all items
+// like each calendar cell that has (+x Items) can be hovered to show all items  
+
 //------------
 //COMPLETED:
 
