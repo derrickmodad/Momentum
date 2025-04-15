@@ -30,6 +30,7 @@
 
 //DROP DOWN BUTTONS FOR VIEW, MONTH, YEAR
 // this is next to calendar so user can change to like a weekly (or even daily) view, and can change the month/year
+//--update: i think a database could be used to offload the current array, and load the queried month/year
 
 //ADD RECURRING TO EVENTS/TASKS
 
