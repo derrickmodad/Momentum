@@ -217,17 +217,36 @@ function buildItemViewCalendar(day) {
         styleCurrentDay(day);
     }
 
+    const maxItemsToShow = 5;
+    let remainingItems = items.length - maxItemsToShow + 1;
+    
     let outerDiv = document.createElement("div");
+    outerDiv.className = "calendarItemGroup";
+    let counter = 1;
     for (let i = 0; i < items.length; i++) {
-        let item = document.createElement("div");
-        let title = document.createElement("p");
-        title.innerHTML = items[i].title;
-        item.appendChild(title);
-        item.style.backgroundColor = items[i].color;
-        item.style.color = determineTextColor(items[i].color);
-        item.className = "calendarItem";
-        outerDiv.appendChild(item);
+        if (counter === maxItemsToShow) {
+            let item = document.createElement("div");
+            let title = document.createElement("p");
+            title.innerHTML = "+ " + remainingItems + " Items";
+            item.appendChild(title);
+            item.style.backgroundColor = "gray";
+            item.style.color = determineTextColor("gray");
+            item.className = "calendarItem";
+            outerDiv.appendChild(item);
+            break;
+        } else {
+            let item = document.createElement("div");
+            let title = document.createElement("p");
+            title.innerHTML = items[i].title;
+            item.appendChild(title);
+            item.style.backgroundColor = items[i].color;
+            item.style.color = determineTextColor(items[i].color);
+            item.className = "calendarItem";
+            outerDiv.appendChild(item);
+            counter++;
+        }
     }
+
 
     calDay.appendChild(outerDiv);
 }
