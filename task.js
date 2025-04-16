@@ -149,11 +149,6 @@ function setupDaysGlobal() {
     }
 }
 
-//this will be used to load data from database into each day
-function loadItems() {
-    //itemsForDays[new Date().getDate() - 1] = new Event("Meeting", "Test Meeting", "red", "Test Location", BUILDING HERE)
-}
-
 function findDay() {
     let date = document.getElementById("taskBarHeaderDay").innerHTML;
     let dayRE = /\w+,\s\w+\s(\d{1,2}),/i;
@@ -192,14 +187,14 @@ function generateNewTask() {
     }
 
     itemsForDays[day].push(newItem);
+    sortItems(day);
     console.log(newItem.type);
-    // console.log(itemsForDays[day]);
 }
 
 function editItem(it, day) {
     day -= 1;
-    let item = itemsForDays[day][it]
-    // console.log(itemsForDays[day][item]);
+    let item = itemsForDays[day][it];
+    document.getElementById("addTaskButton").disabled = true;
     toggleTaskMenuVisibility();
     sideLoadForm(item);
     currentlyEditing = {it, day};
@@ -224,42 +219,22 @@ function sideLoadForm(item) {
         form.elements.taskPriority.value = item.priority; 
         form.elements.taskDeadline.value = item.deadline;
     }
-function displayItems(day) {
-    const currentTaksDiv = document.getElementById("currentTaks");
+}
 
-    let items = itemsForDays[day - 1].slice();
-    items.sort((a, b) => {
+function sortItems(day) {
+    let itemsToSort = itemsForDays[day];
+
+    itemsToSort.sort((a, b) => {
         if (a.type == "event" && b.type == "event") {
-            return new Date(a.startTime) - new Date(b.startTime);
+            return timeToMinutes(a.startTime) - timeToMinutes(b.startTime);
         } else if (a.type == "task" && b.type == "task") {
-            return new Date(a.deadline) - new Date(b.deadline);
+            return timeToMinutes(a.deadline) - timeToMinutes(b.deadline);
         }
         return 0;
     });
-    const maxItemsToShow = 5;
-    let visibleItems = items.slice(0, maxItemsToShow);
-    let remainingItems = items.length - maxItemsToShow;
+}
 
-    visibleItems.forEach((item) => {
-        let itemDiv = document.createElement("div");
-        itemDiv.className = "task-item";
-        itemDiv.style.backgroundColor = item.color;
-        itemDive.innerHTML = `
-            <h3>${item.title}</h3>
-            <p>${item.desc}</p>
-            ${item.type == "task" ? `<p>Deadline: ${new Date(item.deadline).toLocaleString()}</p>` : ""}
-            ${item.type == "event" ? `
-                <p>Location: ${item.location}</p>
-                <p>Start: ${new Date(item.startTime).toLocaleTimeString()}</p>
-                <p>End: ${new Date(item.endTime).toLocaleTimeString}</p>
-            ` : ""}
-        `;
-        currentTasksDiv.appendChild(itemDiv);
-    });
-    if (remainingItems > 0){
-        let moreLabel = document.createElement("div");
-        moreLabel.className = "task-item more-label";
-        moreLabel.innerHTML = `+${remainingItems} more`;
-        currentTasksDiv.appendChild(moreLabel);
-    } 
+function timeToMinutes(timeStr) {
+    const [hours, minutes] = timeStr.split(':').map(Number);
+    return hours * 60 + minutes;
 }
