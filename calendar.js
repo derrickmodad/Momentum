@@ -152,6 +152,34 @@ function buildItemView(day) {
         //left.classList.add(items[i].color);
         left.style.backgroundColor = items[i].color;
         left.style.color = determineTextColor(items[i].color);
+        let leftContent = document.createElement("div");
+        leftContent.className = "leftContent";
+
+        //hidden button for task completion
+        let checkMarkButton = document.createElement("button");
+        checkMarkButton.innerHTML = "<img src='images/checkMark.png' class='checkMark'/>";
+        checkMarkButton.className = "checkMarkButton";
+        let checkMarkButtonContainer = document.createElement("div");
+        checkMarkButtonContainer.className = "checkMarkButtonContainer";
+        checkMarkButtonContainer.appendChild(checkMarkButton);
+        checkMarkButtonContainer.style.display = "none";
+        left.appendChild(checkMarkButtonContainer);
+
+        left.onmouseenter = function() {
+            const content = this.querySelector('.leftContent'); // Find the content within THIS left div
+            content.style.display = "none";
+
+            const checkMark = this.querySelector('.checkMarkButtonContainer');
+            checkMark.style.display = "block";
+        };
+
+        left.onmouseleave = function() {
+            const content = this.querySelector('.leftContent'); // Find the content within THIS left div
+            content.style.display = "block";
+
+            const checkMark = this.querySelector('.checkMarkButtonContainer');
+            checkMark.style.display = "none";
+        };
 
         if (items[i].type == "task") {
             //priority, deadline
@@ -170,7 +198,7 @@ function buildItemView(day) {
             //add deadline to left div
             let deadline = document.createElement("p");
             deadline.textContent = "Deadline: " + items[i].deadline;
-            left.appendChild(deadline);
+            leftContent.appendChild(deadline);
         } else {
             //location, startTime, endTime
 
@@ -182,7 +210,7 @@ function buildItemView(day) {
             //add start to left div
             let start = document.createElement("p");
             start.textContent = "Start: " + items[i].startTime;
-            left.appendChild(start);
+            leftContent.appendChild(start);
 
             //add image to left div
             // let eventImg = document.createElement("img");
@@ -193,12 +221,13 @@ function buildItemView(day) {
             //add end to left div
             let end = document.createElement("p");
             end.textContent = "End: " + items[i].endTime;
-            left.appendChild(end);
+            leftContent.appendChild(end);
         }
 
         //build the item
         right.appendChild(upperRight);
         right.appendChild(lowerRight);
+        left.appendChild(leftContent);
         itemDiv.appendChild(left);
         itemDiv.appendChild(right);
         mainItemDiv.appendChild(itemDiv);
