@@ -212,9 +212,34 @@ body {
 .itemDivLeft {
     border-radius: 8px;
     flex: 0.2;
-    display: block;
+    display: flex;
     text-align: center;
     color: white;
+}
+
+.leftContent {
+    text-align: center;
+    width: 100%;
+}
+
+.checkMarkButtonContainer {
+    background-color: rgb(0, 146, 0);
+    transition: 0.2s ease-in-out;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkMarkButton {
+    background-color: rgb(0, 146, 0);
+    border-radius: 10px;
+    height: 100%;
+    cursor: pointer;
+}
+
+.checkMarkButton img {
+    width: 50%;
 }
 
 .itemImgScaleDown {
