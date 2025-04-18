@@ -225,12 +225,18 @@ function sortItems(day) {
     let itemsToSort = itemsForDays[day];
 
     itemsToSort.sort((a, b) => {
-        if (a.type == "event" && b.type == "event") {
-            return timeToMinutes(a.startTime) - timeToMinutes(b.startTime);
-        } else if (a.type == "task" && b.type == "task") {
-            return timeToMinutes(a.deadline) - timeToMinutes(b.deadline);
-        }
-        return 0;
+        let aTime, bTime;
+        if (a.type == "event")
+            aTime = timeToMinutes(a.startTime); 
+        else  
+            aTime = timeToMinutes(a.deadline);
+
+        if (b.type == "event")
+            bTime = timeToMinutes(b.startTime); 
+        else  
+            bTime = timeToMinutes(b.deadline);
+        
+        return aTime - bTime;
     });
 }
 
