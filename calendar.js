@@ -166,7 +166,7 @@ function buildItemView(day) {
         left.appendChild(checkMarkButtonContainer);
 
         left.onmouseenter = function() {
-            const content = this.querySelector('.leftContent'); // Find the content within THIS left div
+            const content = this.querySelector('.leftContent');
             content.style.display = "none";
 
             const checkMark = this.querySelector('.checkMarkButtonContainer');
@@ -174,12 +174,20 @@ function buildItemView(day) {
         };
 
         left.onmouseleave = function() {
-            const content = this.querySelector('.leftContent'); // Find the content within THIS left div
+            const content = this.querySelector('.leftContent');
             content.style.display = "block";
 
             const checkMark = this.querySelector('.checkMarkButtonContainer');
             checkMark.style.display = "none";
         };
+
+        //build pill with item type
+        let pill = document.createElement("div");
+        let pillText = document.createElement("p");
+        pillText.textContent = items[i].type[0].toUpperCase() + items[i].type.slice(1);
+        pill.appendChild(pillText);
+        pill.className = "itemTypePill";
+        pillText.className = "itemTypePillText";
 
         if (items[i].type == "task") {
             //priority, deadline
@@ -189,11 +197,8 @@ function buildItemView(day) {
             prio.textContent = "Priority: " + items[i].priority;
             upperRight.appendChild(prio);
 
-            //add image to left div
-            // let taskImg = document.createElement("img");
-            // taskImg.src = "images/taskImage.png";
-            // taskImg.className = "itemImgScaleDown";
-            // left.appendChild(taskImg);
+            //add task pill to left div
+            leftContent.appendChild(pill);
 
             //add deadline to left div
             let deadline = document.createElement("p");
@@ -212,11 +217,8 @@ function buildItemView(day) {
             start.textContent = "Start: " + items[i].startTime;
             leftContent.appendChild(start);
 
-            //add image to left div
-            // let eventImg = document.createElement("img");
-            // eventImg.src = "images/eventImage.png";
-            // eventImg.className = "itemImgScaleDown";
-            // left.appendChild(eventImg);
+            //add task pill to left div
+            leftContent.appendChild(pill);
 
             //add end to left div
             let end = document.createElement("p");
@@ -256,10 +258,11 @@ function buildItemViewCalendar(day) {
         if (counter === maxItemsToShow) {
             let item = document.createElement("div");
             let title = document.createElement("p");
-            title.innerHTML = "+ " + remainingItems + " Items";
+            title.innerHTML = "+ " + remainingItems + " Item" + (remainingItems === 1 ? "" : "s");
             item.appendChild(title);
-            item.style.backgroundColor = "gray";
-            item.style.color = determineTextColor("gray");
+            item.style.backgroundColor = "black";
+            item.style.color = "white";
+            item.style.fontWeight = "bold";
             item.className = "calendarItem";
             outerDiv.appendChild(item);
             break;
