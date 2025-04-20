@@ -198,12 +198,18 @@ body {
 /* DISPLAY TASKS */
 
 #currentTasks {
-    working here, trying to get the overflow to be scrollable, and need completed tasks to be at bottom, not right under upcoming
+    overflow-y: scroll;
+    height: 48em;
 }
 
-#itemsForDay {
-    overflow-y: scroll;
-    height: 10%;
+#itemsForDayInner {
+    text-align: center;
+    color: rgb(169, 169, 169);
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    
 }
 
 #completedItemsForDay {
