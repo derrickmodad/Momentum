@@ -20,7 +20,7 @@
  */
 
 let itemsForDays = [];
-let completedItemForDays = [];
+let completedItemsForDays = [];
 let currentlyEditing = null;
 
 class Item {
@@ -152,7 +152,7 @@ function setupDaysGlobal() {
 
     for (let i = 0; i < numDays; i++) {
         itemsForDays.push([]);
-        completedItemForDays.push([]);
+        completedItemsForDays.push([]);
     }
 }
 
@@ -229,15 +229,26 @@ function sideLoadForm(item) {
 }
 
 function completeItem(id) {
+    //find item to be removed
+    id = Number(id);
     let day = findDay();
-    console.log(id);
-    // for (let i = 0; i < itemsForDays[day]; i++) {
+    const items = itemsForDays[day - 1];
+    let index;
+    for (let i = 0; i < items.length; i++) {
+        if (items[i].id === id) {
+            index = i;
+            break;
+        }
+    }
 
-    // }
-
-    //WORKING HERE
-    //this is called to redisplay the day after item is moved to completed 
-    displayItems(day);
+    //if item found, add to completed and remove from itemsForDays
+    if (index !== null) {
+        completedItemsForDays[day - 1].push(items[index]);
+        itemsForDays[day - 1].splice(index, 1);
+        displayItems(day);
+    } else {
+        console.log("could not find " + id + " in day " + day + "!");
+    }
 }
 
 function sortItems(day) {
