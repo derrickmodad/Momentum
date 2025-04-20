@@ -115,7 +115,7 @@ function buildItemView(day) {
         
         //divs for structure
         let itemDiv = document.createElement("div");
-        itemDiv.id = "item" + i;
+        itemDiv.id = items[i].id;
         itemDiv.className = "itemDiv";
 
         let left = document.createElement("div");
@@ -159,6 +159,9 @@ function buildItemView(day) {
         let checkMarkButton = document.createElement("button");
         checkMarkButton.innerHTML = "<img src='images/checkMark.png' class='checkMark'/>";
         checkMarkButton.className = "checkMarkButton";
+        checkMarkButton.onclick = function() {
+            completeItem(itemDiv.id);
+        };
         let checkMarkButtonContainer = document.createElement("div");
         checkMarkButtonContainer.className = "checkMarkButtonContainer";
         checkMarkButtonContainer.appendChild(checkMarkButton);
@@ -282,26 +285,19 @@ function buildItemViewCalendar(day) {
 function determineTextColor(bgc) {
     switch (bgc) {
         case "red":
-            return "black";
-            break;
+            return "white";
         case "orange":
             return "black";
-            break;
         case "yellow":
             return "black";
-            break;
         case "green":
             return "white";
-            break;
         case "blue":
             return "white";
-            break;
         case "purple":
             return "white";
-            break;
         case "gray":
             return "black";
-            break;
     }
 }
 
