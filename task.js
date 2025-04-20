@@ -228,6 +228,7 @@ function sideLoadForm(item) {
     }
 }
 
+//maybe combine completeItem and undoCompleteItem into one
 function completeItem(id) {
     //find item to be removed
     id = Number(id);
@@ -245,6 +246,30 @@ function completeItem(id) {
     if (index !== null) {
         completedItemsForDays[day - 1].push(items[index]);
         itemsForDays[day - 1].splice(index, 1);
+        displayItems(day);
+    } else {
+        console.log("could not find " + id + " in day " + day + "!");
+    }
+}
+
+function undoCompleteItem(id) {
+    //find item to be removed
+    id = Number(id);
+    let day = findDay();
+    const items = completedItemsForDays[day - 1];
+    let index;
+    for (let i = 0; i < items.length; i++) {
+        if (items[i].id === id) {
+            index = i;
+            break;
+        }
+    }
+
+    //if item found, add to itemsForDays and remove from completed
+    if (index !== null) {
+        itemsForDays[day - 1].push(items[index]);
+        sortItems(day - 1);
+        completedItemsForDays[day - 1].splice(index, 1);
         displayItems(day);
     } else {
         console.log("could not find " + id + " in day " + day + "!");
