@@ -20,13 +20,15 @@
  */
 
 let itemsForDays = [];
+let completedItemForDays = [];
 let currentlyEditing = null;
 
 class Item {
     constructor(title, desc, color) {
         this.title = title;
         this.desc = desc;
-        this.color = color
+        this.color = color;
+        this.id = generateID();
     }
 }
 
@@ -47,6 +49,10 @@ class Event extends Item {
         this.endTime = endTime;
         this.type = "event";
     }
+}
+
+function generateID() {
+    return Date.now();
 }
 
 initTaskCreation();
@@ -146,6 +152,7 @@ function setupDaysGlobal() {
 
     for (let i = 0; i < numDays; i++) {
         itemsForDays.push([]);
+        completedItemForDays.push([]);
     }
 }
 
@@ -188,7 +195,7 @@ function generateNewTask() {
 
     itemsForDays[day].push(newItem);
     sortItems(day);
-    console.log(newItem.type);
+    console.log(newItem);
 }
 
 function editItem(it, day) {
@@ -219,6 +226,14 @@ function sideLoadForm(item) {
         form.elements.taskPriority.value = item.priority; 
         form.elements.taskDeadline.value = item.deadline;
     }
+}
+
+function completeItem(id) {
+    let day = findDay();
+    console.log(id);
+    // for (let i = 0; i < itemsForDays[day]; i++) {
+
+    // }
 }
 
 function sortItems(day) {
