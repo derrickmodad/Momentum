@@ -102,137 +102,176 @@ function displayItems(day) {
         div.appendChild(inner);
         div.id = "itemsForDayInner";
         itemDiv.appendChild(div);
-    } else {
-        buildItemView(day);
-        buildItemViewCalendar(day);
     }
+    buildItemView(day);
+    if (document.getElementById("calDay" + day) !== null)
+        buildItemViewCalendar(day);
 }
 
 function buildItemView(day) {
-    let items = itemsForDays[day - 1];
+    let activeItems = itemsForDays[day - 1];
+    let completedItems = completedItemsForDays[day - 1];
     let mainItemDiv = document.getElementById("itemsForDay");
-    for (let i = 0; i < items.length; i++) {
-        
-        //divs for structure
-        let itemDiv = document.createElement("div");
-        itemDiv.id = items[i].id;
-        itemDiv.className = "itemDiv";
+    let completedItemDiv = document.getElementById("completedItemsForDay");
 
-        let left = document.createElement("div");
-        left.className = "itemDivLeft";
+    for (let i = 0; i < activeItems.length; i++) {
+        let curr = buildItem(activeItems[i], true);
+        mainItemDiv.appendChild(curr);
+    }
 
-        let right = document.createElement("div");
-        right.className = "itemDivRight";
+    if (completedItems.length > 0) {
+        completedItemDiv.style.display = "block";
+        completedItemDiv.innerHTML = "";
+        let header = document.createElement("h2");
+        header.textContent = "Completed";
+        completedItemDiv.appendChild(header);
+    } else {
+        completedItemDiv.style.display = "none";
+        completedItemDiv.innerHTML = "";
+    }
 
-        let upperRight = document.createElement("div");
-        upperRight.className = "itemDivRightUpperRight";
+    for (let i = 0; i < completedItems.length; i++) {
+        let curr = buildItem(completedItems[i], false);
+        completedItemDiv.appendChild(curr);
+    }
+}
 
-        let lowerRight = document.createElement("div");
-        lowerRight.className = "itemDivRightLowerRight";
-        
-        //add title to upperRight div
-        let title = document.createElement("h3");
-        title.textContent = items[i].title;
-        upperRight.appendChild(title);
+function buildItem(item, active) {
+    let itemDiv = document.createElement("div");
+    itemDiv.id = item.id;
+    itemDiv.className = "itemDiv";
 
-        //add desc to bottom right
-        let desc = document.createElement("p");
-        desc.textContent = items[i].desc;
-        lowerRight.appendChild(desc);
+    let left = document.createElement("div");
+    left.className = "itemDivLeft";
 
-        let editButton = document.createElement("button");
-        editButton.className = "itemEditButton";
-        editButton.onclick = function() {
-            editItem(i, day);
-        }
-        editButton.innerHTML = "Edit";
-        lowerRight.appendChild(editButton);
-        
-        //give left div color
-        left.style.backgroundColor = items[i].color;
-        left.style.color = determineTextColor(items[i].color);
-        let leftContent = document.createElement("div");
-        leftContent.className = "leftContent";
+    let right = document.createElement("div");
+    right.className = "itemDivRight";
 
-        //hidden button for task completion
-        let checkMarkButton = document.createElement("button");
-        checkMarkButton.innerHTML = "<img src='images/checkMark.png' class='checkMark'/>";
-        checkMarkButton.className = "checkMarkButton";
-        checkMarkButton.onclick = function() {
+    let upperRight = document.createElement("div");
+    upperRight.className = "itemDivRightUpperRight";
+
+    let lowerRight = document.createElement("div");
+    lowerRight.className = "itemDivRightLowerRight";
+    
+    //add title to upperRight div
+    let title = document.createElement("h3");
+    title.textContent = item.title;
+    upperRight.appendChild(title);
+
+    //add desc to bottom right
+    let desc = document.createElement("p");
+    desc.textContent = item.desc;
+    lowerRight.appendChild(desc);
+
+    let editButton = document.createElement("button");
+    editButton.className = "itemEditButton";
+    editButton.onclick = function() {
+        editItem(i, day);
+    }
+    editButton.innerHTML = "Edit";
+    lowerRight.appendChild(editButton);
+    
+    //give left div color
+    if (active) {
+        left.style.backgroundColor = item.color;
+        left.style.color = determineTextColor(item.color);
+    } else {
+        left.style.backgroundColor = determineBackGroundColor(item.color);
+        left.style.color = "black";
+    }
+    let leftContent = document.createElement("div");
+    leftContent.className = "leftContent";
+
+    //hidden button for task action
+    let actionButton = document.createElement("button");
+    let actionButtonContainer = document.createElement("div");
+    if (active) {
+        actionButton.innerHTML = "<img src='images/checkMark.png' class='actionButton'/>";
+        actionButton.className = "checkMarkButton";
+        actionButton.onclick = function() {
             completeItem(itemDiv.id);
         };
-        let checkMarkButtonContainer = document.createElement("div");
-        checkMarkButtonContainer.className = "checkMarkButtonContainer";
-        checkMarkButtonContainer.appendChild(checkMarkButton);
-        checkMarkButtonContainer.style.display = "none";
-        left.appendChild(checkMarkButtonContainer);
-
-        left.onmouseenter = function() {
-            const content = this.querySelector('.leftContent');
-            content.style.display = "none";
-
-            const checkMark = this.querySelector('.checkMarkButtonContainer');
-            checkMark.style.display = "block";
+        actionButtonContainer.className = "actionButtonContainer";
+        actionButtonContainer.appendChild(actionButton);
+        actionButtonContainer.style.display = "none";
+    } else {
+        actionButton.innerHTML = "<img src='images/undoArrow.png' class='actionButton'/>";
+        actionButton.className = "undoArrowButton";
+        actionButton.onclick = function() {
+            undoCompleteItem(itemDiv.id);
         };
-
-        left.onmouseleave = function() {
-            const content = this.querySelector('.leftContent');
-            content.style.display = "flex";
-
-            const checkMark = this.querySelector('.checkMarkButtonContainer');
-            checkMark.style.display = "none";
-        };
-
-        //build pill with item type
-        let pill = document.createElement("div");
-        let pillText = document.createElement("p");
-        pillText.textContent = items[i].type[0].toUpperCase() + items[i].type.slice(1);
-        pill.appendChild(pillText);
-        pill.className = "itemTypePill";
-        pillText.className = "itemTypePillText";
-
-        //add task pill to left div
-        leftContent.appendChild(pill);
-
-        if (items[i].type == "task") {
-            //priority, deadline
-            
-            //add priority to upperRight div
-            let prio = document.createElement("p");
-            prio.textContent = "Priority: " + items[i].priority;
-            upperRight.appendChild(prio);
-
-            //add deadline to left div
-            let deadline = document.createElement("p");
-            deadline.textContent = "Deadline: " + items[i].deadline;
-            leftContent.appendChild(deadline);
-        } else {
-            //location, startTime, endTime
-
-            //add location to upperRight div
-            let location = document.createElement("p");
-            location.textContent = items[i].location;
-            upperRight.appendChild(location);
-
-            //add start to left div
-            let start = document.createElement("p");
-            start.textContent = "Start: " + items[i].startTime;
-            leftContent.appendChild(start);
-
-            //add end to left div
-            let end = document.createElement("p");
-            end.textContent = "End: " + items[i].endTime;
-            leftContent.appendChild(end);
-        }
-
-        //build the item
-        right.appendChild(upperRight);
-        right.appendChild(lowerRight);
-        left.appendChild(leftContent);
-        itemDiv.appendChild(left);
-        itemDiv.appendChild(right);
-        mainItemDiv.appendChild(itemDiv);
+        actionButtonContainer.className = "actionButtonContainer";
+        actionButtonContainer.style.backgroundColor = "rgb(85, 85, 85)";
+        actionButtonContainer.appendChild(actionButton);
+        actionButtonContainer.style.display = "none";
     }
+    left.appendChild(actionButtonContainer);
+
+    left.onmouseenter = function() {
+        const content = this.querySelector('.leftContent');
+        content.style.display = "none";
+
+        const checkMark = this.querySelector('.actionButtonContainer');
+        checkMark.style.display = "block";
+    };
+
+    left.onmouseleave = function() {
+        const content = this.querySelector('.leftContent');
+        content.style.display = "flex";
+
+        const checkMark = this.querySelector('.actionButtonContainer');
+        checkMark.style.display = "none";
+    };
+
+    //build pill with item type
+    let pill = document.createElement("div");
+    let pillText = document.createElement("p");
+    pillText.textContent = item.type[0].toUpperCase() + item.type.slice(1);
+    pill.appendChild(pillText);
+    pill.className = "itemTypePill";
+    pillText.className = "itemTypePillText";
+
+    //add task pill to left div
+    leftContent.appendChild(pill);
+
+    if (item.type == "task") {
+        //priority, deadline
+        
+        //add priority to upperRight div
+        let prio = document.createElement("p");
+        prio.textContent = "Priority: " + item.priority;
+        upperRight.appendChild(prio);
+
+        //add deadline to left div
+        let deadline = document.createElement("p");
+        deadline.textContent = "Deadline: " + item.deadline;
+        leftContent.appendChild(deadline);
+    } else {
+        //location, startTime, endTime
+
+        //add location to upperRight div
+        let location = document.createElement("p");
+        location.textContent = item.location;
+        upperRight.appendChild(location);
+
+        //add start to left div
+        let start = document.createElement("p");
+        start.textContent = "Start: " + item.startTime;
+        leftContent.appendChild(start);
+
+        //add end to left div
+        let end = document.createElement("p");
+        end.textContent = "End: " + item.endTime;
+        leftContent.appendChild(end);
+    }
+
+    //build the item
+    right.appendChild(upperRight);
+    right.appendChild(lowerRight);
+    left.appendChild(leftContent);
+    itemDiv.appendChild(left);
+    itemDiv.appendChild(right);
+    return itemDiv;
 }
 
 function buildItemViewCalendar(day) {
@@ -297,6 +336,25 @@ function determineTextColor(bgc) {
             return "white";
         case "gray":
             return "black";
+    }
+}
+
+function determineBackGroundColor(bgc) {
+    switch (bgc) {
+        case "red":
+            return "lightcoral";
+        case "orange":
+            return "lightsalmon";
+        case "yellow":
+            return "lightyellow";
+        case "green":
+            return "lightgreen";
+        case "blue":
+            return "lightblue";
+        case "purple":
+            return "plum";
+        case "gray":
+            return "lightgray";
     }
 }
 
