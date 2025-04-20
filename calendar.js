@@ -34,7 +34,6 @@ function buildCalendar() {
         newDay.className = "calendarCell";
         newDay.id = "calendarDay" + i;
         newDay.addEventListener("click", function() {
-            console.log("DEBUG: " + newDay.id);
             focusDay(i);
         });
 
@@ -98,13 +97,13 @@ function displayItems(day) {
     if (itemsForDays[day - 1].length === 0) {
         let div = document.createElement("div");
         let inner = document.createElement("h3");
-        inner.innerHTML = "No items for today";
+        inner.innerHTML = "No upcoming items";
         div.appendChild(inner);
         div.id = "itemsForDayInner";
         itemDiv.appendChild(div);
     }
     buildItemView(day);
-    if (document.getElementById("calDay" + day) !== null)
+    if (document.getElementById("calendarDay" + day) !== null)
         buildItemViewCalendar(day);
 }
 
