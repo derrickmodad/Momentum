@@ -149,7 +149,6 @@ function buildItemView(day) {
         lowerRight.appendChild(editButton);
         
         //give left div color
-        //left.classList.add(items[i].color);
         left.style.backgroundColor = items[i].color;
         left.style.color = determineTextColor(items[i].color);
         let leftContent = document.createElement("div");

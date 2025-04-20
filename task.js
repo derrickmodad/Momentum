@@ -234,6 +234,10 @@ function completeItem(id) {
     // for (let i = 0; i < itemsForDays[day]; i++) {
 
     // }
+
+    //WORKING HERE
+    //this is called to redisplay the day after item is moved to completed 
+    displayItems(day);
 }
 
 function sortItems(day) {
