@@ -175,7 +175,7 @@ function buildItemView(day) {
 
         left.onmouseleave = function() {
             const content = this.querySelector('.leftContent');
-            content.style.display = "block";
+            content.style.display = "flex";
 
             const checkMark = this.querySelector('.checkMarkButtonContainer');
             checkMark.style.display = "none";
@@ -189,6 +189,9 @@ function buildItemView(day) {
         pill.className = "itemTypePill";
         pillText.className = "itemTypePillText";
 
+        //add task pill to left div
+        leftContent.appendChild(pill);
+
         if (items[i].type == "task") {
             //priority, deadline
             
@@ -196,9 +199,6 @@ function buildItemView(day) {
             let prio = document.createElement("p");
             prio.textContent = "Priority: " + items[i].priority;
             upperRight.appendChild(prio);
-
-            //add task pill to left div
-            leftContent.appendChild(pill);
 
             //add deadline to left div
             let deadline = document.createElement("p");
@@ -216,9 +216,6 @@ function buildItemView(day) {
             let start = document.createElement("p");
             start.textContent = "Start: " + items[i].startTime;
             leftContent.appendChild(start);
-
-            //add task pill to left div
-            leftContent.appendChild(pill);
 
             //add end to left div
             let end = document.createElement("p");
@@ -278,7 +275,6 @@ function buildItemViewCalendar(day) {
             counter++;
         }
     }
-
 
     calDay.appendChild(outerDiv);
 }
