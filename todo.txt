@@ -4,15 +4,6 @@
 //---IN PROGRESS
 
 //GONNA GET THESE DONE FRIDAY ----- (Derrick)
-//NOW NEED TO SHOW THE TASKS/EVENTS FOR THE SELECTED DAY
-//IF NO TASKS, SAY NO TASKS with like a message or something
-//--update: started, items display for each day on taskbar
-//--update: events/tasks show for each day on taskbar, styling is pretty good
-//              i think there should be an image for users to easily differentiate between tasks and events
-//                  (started this with the images, but the task image is wack - wip)
-//              --maybe instead of images, it's just a word in like a pill shape?
-//           --update: after some deep reflection, i like the sound of this ^
-//---- should be done now
 //
 //SYSTEM FOR COMPLETING EVENT/TASK -Derrick
 //WHEN USER CLICKS, MOVE ITEM TO COMPLETED SECTION AT BOTTOM
@@ -113,3 +104,13 @@
 //-----
 
 Test---
+
+//NOW NEED TO SHOW THE TASKS/EVENTS FOR THE SELECTED DAY
+//IF NO TASKS, SAY NO TASKS with like a message or something
+//--update: started, items display for each day on taskbar
+//--update: events/tasks show for each day on taskbar, styling is pretty good
+//              i think there should be an image for users to easily differentiate between tasks and events
+//                  (started this with the images, but the task image is wack - wip)
+//              --maybe instead of images, it's just a word in like a pill shape?
+//           --update: after some deep reflection, i like the sound of this ^
+//---- should be done now
