@@ -10,8 +10,6 @@
 
 //GONNA GET THESE DONE NEXT ----- (Derrick)
 //
-//ADD STYLE FOR SELECTED DAY (DIFFERENT FROM CURRENT/ACTIVE DAY, THIS IS WHEN USER CLICKS A DAY TO SEE AND ADD ITEMS)
-//
 //ADD REMOVE ITEM BUTTON IN EDIT SCREEN (WILL HAVE TO ADD BUTTON THAT ONLY APPEARS ON EDIT TO REMOVE)
 //
 // ----- FRIDAY
@@ -122,3 +120,6 @@ Test---
 //              move item to a completed section at the bottom?
 //                  this way, user can just scroll down to maybe re-add the item (if completion was done in error or something)
 //----------
+
+//SHOULD BE DONE NOW
+//ADD STYLE FOR SELECTED DAY (DIFFERENT FROM CURRENT/ACTIVE DAY, THIS IS WHEN USER CLICKS A DAY TO SEE AND ADD ITEMS)
