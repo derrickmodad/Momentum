@@ -241,7 +241,7 @@ function completeItem(id) {
     id = Number(id);
     let day = findDay();
     const items = itemsForDays[day - 1];
-    let index;
+    let index = -1;
     for (let i = 0; i < items.length; i++) {
         if (items[i].id === id) {
             index = i;
@@ -250,7 +250,7 @@ function completeItem(id) {
     }
 
     //if item found, add to completed and remove from itemsForDays
-    if (index !== null) {
+    if (index !== -1) {
         completedItemsForDays[day - 1].push(items[index]);
         itemsForDays[day - 1].splice(index, 1);
         displayItems(day);
