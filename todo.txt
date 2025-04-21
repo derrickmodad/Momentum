@@ -3,9 +3,16 @@
 
 //---IN PROGRESS
 
+//backend thoughts:
+//probably gonna use MERN stack (without the react lol)
+//query databse on login and change of month/year
+//write to databse on item completion, creation, and edit
+
 //GONNA GET THESE DONE NEXT ----- (Derrick)
 //
 //ADD STYLE FOR SELECTED DAY (DIFFERENT FROM CURRENT/ACTIVE DAY, THIS IS WHEN USER CLICKS A DAY TO SEE AND ADD ITEMS)
+//
+//ADD REMOVE ITEM BUTTON IN EDIT SCREEN (WILL HAVE TO ADD BUTTON THAT ONLY APPEARS ON EDIT TO REMOVE)
 //
 // ----- FRIDAY
 
