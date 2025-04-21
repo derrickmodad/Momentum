@@ -39,6 +39,7 @@ function buildCalendar() {
 
         if (i === today) {
             newDay.classList.add("calendarCellActive");
+            newDay.classList.add("activeDay");
             focusDay(i);
         }
 
@@ -71,6 +72,15 @@ function styleCurrentDay(day) {
     calDay.appendChild(dayDiv);
 }
 
+function styleActiveDay(day) {
+    let calDay = document.getElementById("calendarDay" + day);
+    let activeDay = document.querySelector(".activeDay");
+    if (activeDay !== null)
+        activeDay.classList.remove("activeDay");
+    if (calDay !== null)
+        calDay.classList.add("activeDay");
+}
+
 function focusDay(day) {
     let header = document.getElementById("taskBarHeaderDay");
     let dateForHeader = new Date();
@@ -86,6 +96,7 @@ function focusDay(day) {
     dateForHeader = dateForHeader.toLocaleDateString(navigator.language, options);
     header.innerHTML = dateForHeader; 
 
+    styleActiveDay(day);
     displayItems(day);
 }
 

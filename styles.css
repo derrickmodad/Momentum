@@ -358,6 +358,12 @@ body {
     padding: 0.2em;
 }
 
+.activeDay {
+    /* background-color: rgb(177, 177, 177); */
+    background-color: black;
+    color: white;
+}
+
 .calendarItem {
     border-radius: 10px;
     padding-left: 0.5em;
