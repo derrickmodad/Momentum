@@ -5,23 +5,6 @@
 
 //GONNA GET THESE DONE FRIDAY ----- (Derrick)
 //
-//SYSTEM FOR COMPLETING EVENT/TASK -Derrick
-//WHEN USER CLICKS, MOVE ITEM TO COMPLETED SECTION AT BOTTOM
-//MAY NEED A FINISHED FLAG IN ITEM CLASS FOR THIS
-//--Build hover event
-//      on hover of left, left converts into button to complete item
-//        on click of button, item is moved to bottom in new div for completed items
-//--update: started, got button to appear on hover of left of item, now need to build functionality
-//          i think this can be done by:
-//              on complete button click, add item to completed array for day (this means having essentially another itemsForDays array, but this one is for completed items)
-//                  note: as far as keeping track of which item is which, im not sure (maybe have to generate item ids? this would be beneficial for database too)
-//                      just realized each item is given a unique id (item + i), so maybe this is a potential solution?
-//              remove item from itemsForDays
-//              remove item from upcoming view
-//              move item to a completed section at the bottom?
-//                  this way, user can just scroll down to maybe re-add the item (if completion was done in error or something)
-//
-//
 //ADD STYLE FOR SELECTED DAY (DIFFERENT FROM CURRENT/ACTIVE DAY, THIS IS WHEN USER CLICKS A DAY TO SEE AND ADD ITEMS)
 //
 // ----- FRIDAY
@@ -114,3 +97,21 @@ Test---
 //              --maybe instead of images, it's just a word in like a pill shape?
 //           --update: after some deep reflection, i like the sound of this ^
 //---- should be done now
+
+//SHOULD BE DONE NOW -----
+//SYSTEM FOR COMPLETING EVENT/TASK -Derrick
+//WHEN USER CLICKS, MOVE ITEM TO COMPLETED SECTION AT BOTTOM
+//MAY NEED A FINISHED FLAG IN ITEM CLASS FOR THIS
+//--Build hover event
+//      on hover of left, left converts into button to complete item
+//        on click of button, item is moved to bottom in new div for completed items
+//--update: started, got button to appear on hover of left of item, now need to build functionality
+//          i think this can be done by:
+//              on complete button click, add item to completed array for day (this means having essentially another itemsForDays array, but this one is for completed items)
+//                  note: as far as keeping track of which item is which, im not sure (maybe have to generate item ids? this would be beneficial for database too)
+//                      just realized each item is given a unique id (item + i), so maybe this is a potential solution?
+//              remove item from itemsForDays
+//              remove item from upcoming view
+//              move item to a completed section at the bottom?
+//                  this way, user can just scroll down to maybe re-add the item (if completion was done in error or something)
+//----------
