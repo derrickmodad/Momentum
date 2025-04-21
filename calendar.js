@@ -165,7 +165,7 @@ function buildItem(item, active) {
     let editButton = document.createElement("button");
     editButton.className = "itemEditButton";
     editButton.onclick = function() {
-        editItem(i, day);
+        editItem(item.id);
     }
     editButton.innerHTML = "Edit";
     lowerRight.appendChild(editButton);

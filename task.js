@@ -132,7 +132,7 @@ function setupTaskCreationFormControls() {
     let finish = document.getElementById("finishTaskCreation");
     finish.addEventListener("click", function() {
         if (currentlyEditing !== null) {
-            itemsForDays[currentlyEditing.day].splice(currentlyEditing.it, 1);
+            itemsForDays[currentlyEditing.day].splice(currentlyEditing.index, 1);
             currentlyEditing = null;
         }
         generateNewTask();
@@ -198,13 +198,20 @@ function generateNewTask() {
     console.log(newItem);
 }
 
-function editItem(it, day) {
-    day -= 1;
-    let item = itemsForDays[day][it];
+function editItem(itemID) {
+    let day = findDay() - 1;
+    let index;
+    for (let i = 0; i < itemsForDays[day].length; i++) {
+        if (itemsForDays[day][i].id === itemID) {
+            index = i;
+            break;
+        }
+    }
+    let item = itemsForDays[day][index];
     document.getElementById("addTaskButton").disabled = true;
     toggleTaskMenuVisibility();
     sideLoadForm(item);
-    currentlyEditing = {it, day};
+    currentlyEditing = {index, day};
 }
 
 function sideLoadForm(item) {
