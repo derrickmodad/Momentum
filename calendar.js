@@ -162,13 +162,15 @@ function buildItem(item, active) {
     desc.textContent = item.desc;
     lowerRight.appendChild(desc);
 
-    let editButton = document.createElement("button");
-    editButton.className = "itemEditButton";
-    editButton.onclick = function() {
-        editItem(item.id);
+    if (active) {
+        let editButton = document.createElement("button");
+        editButton.className = "itemEditButton";
+        editButton.onclick = function() {
+            editItem(item.id);
+        }
+        editButton.innerHTML = "Edit";
+        lowerRight.appendChild(editButton);
     }
-    editButton.innerHTML = "Edit";
-    lowerRight.appendChild(editButton);
     
     //give left div color
     if (active) {
