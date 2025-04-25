@@ -4,9 +4,16 @@
 //---IN PROGRESS
 
 //backend thoughts:
-//probably gonna use MERN stack (without the react lol)
+
 //query databse on login and change of month/year
 //write to databse on item completion, creation, and edit
+//NEVERMIND - GONNA USE SUPABASE
+//STARTED TABLE ON SUPABASE
+//WORKING ON HOOKING UP TO SUPABASE
+//GOT A SUCCESSFUL SIGN IN
+//  MADE QUICK FORM FOR TESTING AND MADE A DUMMY ACCOUNT IN SUPABASE
+//  SO FAR, CAN SUCCESSFULLY SIGN IN TO THE WEBSITE
+//Also, set up some RLS policies in supabase
 
 //GONNA GET THESE DONE NEXT ----- (Derrick)
 //
