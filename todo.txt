@@ -3,6 +3,30 @@
 
 //---IN PROGRESS
 
+//WORKING ON THESE NEXT ----- (Derrick)
+//
+//SETUP LOGIN/SIGNUP PAGE
+//--Working on creating login/signup page
+//  Started login html and styling
+//
+//SETUP BACKEND LOGIC TO HANDLE LOGIN AND SIGN UP
+//-- check backend setup, mainly the connection establishment now that the file with the key has been separated
+//     currently an error in the console
+//
+//UPON SIGN IN, LOAD USER INFO
+//
+//DROP DOWN BUTTONS FOR VIEW, MONTH, YEAR
+//  this is next to calendar so user can change to like a weekly (or even daily) view, and can change the month/year
+//
+//LOGO
+//  --added logo mk1
+//
+//ADD STYLE FOR SELECTED DAY (DIFFERENT FROM CURRENT/ACTIVE DAY, THIS IS WHEN USER CLICKS A DAY TO SEE AND ADD ITEMS)
+//  --added a basic change of color
+//  --will revisit later
+//
+// -----
+
 //backend thoughts:
 
 //query databse on login and change of month/year
@@ -15,28 +39,16 @@
 //  SO FAR, CAN SUCCESSFULLY SIGN IN TO THE WEBSITE
 //Also, set up some RLS policies in supabase
 
-//GONNA GET THESE DONE NEXT ----- (Derrick)
-//
 //ADD REMOVE ITEM BUTTON IN EDIT SCREEN (WILL HAVE TO ADD BUTTON THAT ONLY APPEARS ON EDIT TO REMOVE)
-//
-// ----- FRIDAY
 
 //ALSO, CHECK THAT REQUIRED FORM ELEMENTS PROHIBIT SUBMISSION UNTIL FILLED IN
 // SPOILER: I DON'T THINK THEY DO THAT, SO THERE CAN BE NULL VALUES 
 
 //VALIDATE TIME FOR EVENTS (SHOULDN'T BE ABLE TO SET START TIME AFTER END TIME)
 
-//DROP DOWN BUTTONS FOR VIEW, MONTH, YEAR
-// this is next to calendar so user can change to like a weekly (or even daily) view, and can change the month/year
-//--update: i think a database could be used to offload the current array, and load the queried month/year
-
 //ADD RECURRING TO EVENTS/TASKS
 
 //TOP NAV BAR
-
-//LOGO -Derrick
-
-//ADD STYLE FOR SELECTED DAY (DIFFERENT FROM CURRENT/ACTIVE DAY, THIS IS WHEN USER CLICKS A DAY TO SEE AND ADD ITEMS)
 
 //found bug with edit feature
 //when user edits item and selects a different day than what the item was originally,
