@@ -3,18 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="loginstyles.css">
+    <link rel="icon" type="image/x-icon" href="images/momentumFavicon.ico">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script src="supabase.js"></script>
     <script src="login.js" defer></script>
     <title>Momentum: Log In</title>
 </head>
 <body>
-    <form id="loginForm">
-        <label for="emailInput">Email</label>
-        <input type="email" name="emailInput" id="emailInput">
-        <label for="passwordInput">Password</label>
-        <input type="text" name="passwordInput" id="passwordInput">
-        <button type="submit">Log In</button>
-    </form>
+    <div id="upperDiv">
+        <img src="images/MomentumLogoFull.png" alt="Momentum" id="loginLogo">
+    </div>
+    <div id="lowerDiv">
+        <form id="loginForm">
+            <label for="emailInput">Email</label>
+            <input type="email" name="emailInput" id="emailInput">
+            <label for="passwordInput">Password</label>
+            <input type="text" name="passwordInput" id="passwordInput">
+            <button type="submit">Log In</button>
+        </form>
+    </div>
 </body>
 </html>
