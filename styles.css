@@ -359,9 +359,8 @@ body {
 }
 
 .activeDay {
-    /* background-color: rgb(177, 177, 177); */
-    background-color: black;
-    color: white;
+    border-color: black;
+    border-width: 1px;
 }
 
 .calendarItem {
