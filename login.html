@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="loginstyles.css">
     <link rel="icon" type="image/x-icon" href="images/momentumFavicon.ico">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="config.js"></script>
     <script src="supabase.js"></script>
     <script src="login.js" defer></script>
     <title>Momentum: Log In</title>
@@ -14,13 +15,42 @@
     <div id="upperDiv">
         <img src="images/MomentumLogoFull.png" alt="Momentum" id="loginLogo">
     </div>
-    <div id="lowerDiv">
-        <form id="loginForm">
-            <label for="emailInput">Email</label>
-            <input type="email" name="emailInput" id="emailInput">
-            <label for="passwordInput">Password</label>
-            <input type="text" name="passwordInput" id="passwordInput">
-            <button type="submit">Log In</button>
+    <div id="loginDiv" class="userAccessFormDiv">
+        <form id="loginForm" class="userAccessForm">
+            <h2>Log In</h2>
+            <div id="emailDiv" class="formItem">
+                <label for="loginEmailInput">Email</label>
+                <input type="email" name="loginEmailInput" id="loginEmailInput" required>
+            </div>
+            <div id="passwordDiv" class="formItem">
+                <label for="loginPasswordInput">Password</label>
+                <input type="text" name="loginPasswordInput" id="loginPasswordInput" required>
+            </div>
+            <button type="submit" class="formControlButton">Log In</button>
+            <p>Don't have an account? <a class="changeFormHyperlink" onclick="toggleForm(1)">Sign Up</a></p>
+        </form>
+    </div>
+    <div id="signUpDiv" class="userAccessFormDiv hidden">
+        <form id="signUpForm" class="userAccessForm">
+            <h2>Sign Up</h2>
+            <div id="signupEmailDiv" class="formItem">
+                <label for="signupEmailInput">Email</label>
+                <input type="email" name="signupEmailInput" id="signupEmailInput" required>
+            </div>
+            <div id="signupName" class="formItem">
+                <label for="signupNameInput">Name</label>
+                <input type="text" name="signupNameInput" id="signupNameInput" required>
+            </div>
+            <div id="signupPasswordDiv" class="formItem">
+                <label for="signupPasswordInput">Password</label>
+                <input type="text" name="signupPasswordInput" id="signupPasswordInput" required>
+            </div>
+            <div id="signupConfirmPasswordDiv" class="formItem">
+                <label for="signupConfirmPasswordInput">Confirm Password</label>
+                <input type="text" name="signupConfirmPasswordInput" id="signupConfirmPasswordInput" required>
+            </div>
+            <button type="submit" class="formControlButton">Sign Up</button>
+            <p>Already have an account? <a class="changeFormHyperlink" onclick="toggleForm(2)">Log in</a></p>
         </form>
     </div>
 </body>
