@@ -8,6 +8,10 @@
 //SETUP LOGIN/SIGNUP PAGE
 //--Working on creating login/signup page
 //  Started login html and styling
+//--created and styled both login and signup forms
+//      log in worked with backend, yet to try sign up
+//      also, need to tweak the styling of the logo on home page and the size of the forms
+//          everything is a bit w i d e
 //
 //SETUP BACKEND LOGIC TO HANDLE LOGIN AND SIGN UP
 //-- check backend setup, mainly the connection establishment now that the file with the key has been separated
@@ -20,10 +24,6 @@
 //
 //LOGO
 //  --added logo mk1
-//
-//ADD STYLE FOR SELECTED DAY (DIFFERENT FROM CURRENT/ACTIVE DAY, THIS IS WHEN USER CLICKS A DAY TO SEE AND ADD ITEMS)
-//  --added a basic change of color
-//  --will revisit later
 //
 // -----
 
@@ -142,5 +142,6 @@ Test---
 
 //SHOULD BE DONE NOW
 //ADD STYLE FOR SELECTED DAY (DIFFERENT FROM CURRENT/ACTIVE DAY, THIS IS WHEN USER CLICKS A DAY TO SEE AND ADD ITEMS)
-
-//Test commit after cleaning
+//  --added a basic change of color
+//  --will revisit later
+//--just changed it to be a border color change, which i like better than the background being a harsh contrast
