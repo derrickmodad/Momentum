@@ -61,3 +61,13 @@ function toggleFormFields(container, enable) {
       i.disabled = !enable;
   });
 }
+
+document.querySelectorAll(".toggleShowPassword").forEach(toggle => {
+  toggle.addEventListener("click", () => {
+    const wrapper = toggle.closest(".passwordInputWrapper");
+    const input = wrapper.querySelector(".passwordInput");
+    const isPassword = input.type === "password";
+    input.type = isPassword ? "text" : "password";
+    toggle.textContent = isPassword ? "HIDE" : "SHOW";
+  });
+});

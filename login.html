@@ -25,7 +25,10 @@
                 </div>
                 <div id="passwordDiv" class="formItem">
                     <label for="loginPasswordInput">Password</label>
-                    <input type="password" name="loginPasswordInput" id="loginPasswordInput" required>
+                    <div class="passwordInputWrapper">
+                        <input type="password" name="loginPasswordInput" id="loginPasswordInput" class="passwordInput" minlength="8" maxlength="64" required>
+                        <span class="toggleShowPassword">SHOW</span>
+                    </div>
                 </div>
                 <div id="errorDiv" class="hidden">
                     <p style="color: red;">Invalid Email or Password</p>
@@ -47,11 +50,17 @@
                 </div>
                 <div id="signupPasswordDiv" class="formItem">
                     <label for="signupPasswordInput">Password</label>
-                    <input type="password" name="signupPasswordInput" id="signupPasswordInput" required>
+                    <div class="passwordInputWrapper">
+                        <input type="password" name="signupPasswordInput" id="signupPasswordInput" class="passwordInput" minlength="8" maxlength="64" required>
+                        <span class="toggleShowPassword">SHOW</span>
+                    </div>
                 </div>
                 <div id="signupConfirmPasswordDiv" class="formItem">
                     <label for="signupConfirmPasswordInput">Confirm Password</label>
-                    <input type="password" name="signupConfirmPasswordInput" id="signupConfirmPasswordInput" required>
+                    <div class="passwordInputWrapper">
+                        <input type="password" name="signupConfirmPasswordInput" id="signupConfirmPasswordInput" class="passwordInput" minlength="8" maxlength="64" required>
+                        <span class="toggleShowPassword">SHOW</span>
+                    </div>
                 </div>
                 <button type="submit" class="formControlButton">Sign Up</button>
                 <p>Already have an account? <a class="changeFormHyperlink" onclick="toggleForm(2)">Log in</a></p>

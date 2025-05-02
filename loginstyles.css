@@ -67,6 +67,24 @@ body {
     box-sizing: border-box;
 }
 
+.passwordInputWrapper {
+    position: relative;
+    width: fit-content;
+    display: inline-block;
+    width: 100%;
+}
+  
+.toggleShowPassword {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 0.7em;
+    color: gray;
+    user-select: none;
+}
+
 .formControlButton {
     background-color: black;
     color: white;
