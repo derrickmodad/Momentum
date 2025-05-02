@@ -1,5 +1,7 @@
 "use strict";
 
+let errorTextVisible = false;
+
 let loginForm = document.getElementById("loginForm");
 
 loginForm.addEventListener("submit", async (e) => {
@@ -14,10 +16,26 @@ loginForm.addEventListener("submit", async (e) => {
 
     if (error) {
       console.log("Login failed: " + error.message);
+      document.getElementById("errorDiv").classList.remove("hidden");
+      errorTextVisible = true;
     } else {
       console.log("Logged in!");
       window.location.href = "index.html";
     }
+});
+
+document.getElementById("loginEmailInput").addEventListener("input", () => {
+  if (errorTextVisible) {
+    errorTextVisible = false;
+    document.getElementById("errorDiv").classList.add("hidden");
+  }
+});
+
+document.getElementById("loginPasswordInput").addEventListener("input", () => {
+  if (errorTextVisible) {
+    errorTextVisible = false;
+    document.getElementById("errorDiv").classList.add("hidden");
+  }
 });
 
 function toggleForm(calling) {

@@ -25,7 +25,10 @@
                 </div>
                 <div id="passwordDiv" class="formItem">
                     <label for="loginPasswordInput">Password</label>
-                    <input type="text" name="loginPasswordInput" id="loginPasswordInput" required>
+                    <input type="password" name="loginPasswordInput" id="loginPasswordInput" required>
+                </div>
+                <div id="errorDiv" class="hidden">
+                    <p style="color: red;">Invalid Email or Password</p>
                 </div>
                 <button type="submit" class="formControlButton">Log In</button>
                 <p>Don't have an account? <a class="changeFormHyperlink" onclick="toggleForm(1)">Sign Up</a></p>
@@ -44,11 +47,11 @@
                 </div>
                 <div id="signupPasswordDiv" class="formItem">
                     <label for="signupPasswordInput">Password</label>
-                    <input type="text" name="signupPasswordInput" id="signupPasswordInput" required>
+                    <input type="password" name="signupPasswordInput" id="signupPasswordInput" required>
                 </div>
                 <div id="signupConfirmPasswordDiv" class="formItem">
                     <label for="signupConfirmPasswordInput">Confirm Password</label>
-                    <input type="text" name="signupConfirmPasswordInput" id="signupConfirmPasswordInput" required>
+                    <input type="password" name="signupConfirmPasswordInput" id="signupConfirmPasswordInput" required>
                 </div>
                 <button type="submit" class="formControlButton">Sign Up</button>
                 <p>Already have an account? <a class="changeFormHyperlink" onclick="toggleForm(2)">Log in</a></p>
