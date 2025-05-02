@@ -356,6 +356,7 @@ body {
     border-radius: 50%;
     width: 1em;
     padding: 0.2em;
+    text-align: center;
 }
 
 .activeDay {
