@@ -12,6 +12,10 @@
 //      log in worked with backend, yet to try sign up
 //      also, need to tweak the styling of the logo on home page and the size of the forms
 //          everything is a bit w i d e
+//--update: got the styling to a solid point, also have most features (i think)
+//          now need to focus on input validation:
+//                  email: fits regex
+//                  passwords: matching passwords (for sign-up), min length, character requirements
 //
 //SETUP BACKEND LOGIC TO HANDLE LOGIN AND SIGN UP
 //-- check backend setup, mainly the connection establishment now that the file with the key has been separated
@@ -21,9 +25,6 @@
 //
 //DROP DOWN BUTTONS FOR VIEW, MONTH, YEAR
 //  this is next to calendar so user can change to like a weekly (or even daily) view, and can change the month/year
-//
-//LOGO
-//  --added logo mk1
 //
 // -----
 
@@ -53,6 +54,8 @@
 //found bug with edit feature
 //when user edits item and selects a different day than what the item was originally,
 //  the item stays visible on the calendar on the old day and a new version appears on new day
+
+//edit readme for project
 
 //------------
 //BACKBURNER:
@@ -145,3 +148,7 @@ Test---
 //  --added a basic change of color
 //  --will revisit later
 //--just changed it to be a border color change, which i like better than the background being a harsh contrast
+
+//LOGO
+//  --added logo mk1
+//--This is first edition, may be refined later
