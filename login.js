@@ -24,6 +24,33 @@ loginForm.addEventListener("submit", async (e) => {
     }
 });
 
+let signUpForm = document.getElementById("signUpForm");
+
+signUpForm.addEventListener("submit", async(e) => {
+  e.preventDefault();
+  const email = document.getElementById("signupEmailInput").value;
+  const name = document.getElementById("signupNameInput").value;
+  const password = document.getElementById("signupPasswordInput").value;
+
+  const {data, error} = await supabase.auth.signUp({
+    email,
+    options: {
+      data: {
+        name
+      },
+    },
+    password
+  });
+
+  if (error) {
+    console.log("Sign up failed: " + error.message);
+  } else {
+    console.log("Signed Up!");
+    window.location.href = "index.html";
+  }
+
+});
+
 document.getElementById("loginEmailInput").addEventListener("input", () => {
   if (errorTextVisible) {
     errorTextVisible = false;
