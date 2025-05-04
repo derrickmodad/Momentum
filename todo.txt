@@ -20,8 +20,16 @@
 //SETUP BACKEND LOGIC TO HANDLE LOGIN AND SIGN UP
 //-- check backend setup, mainly the connection establishment now that the file with the key has been separated
 //     currently an error in the console
+//--update: built primitive sign up service. successfully adds to database and sends verification email and signing in with created account works
+//      Now need to build system that prevents initial user sign in until email has been verified
+//      Also need system for when reusing email verification link, prompts users to sign in 
+//          noticed this after re-clicking email verification link and took me to home page with error in URL query
+//      I did notice that the email verification sending service is slow, something to think about 
 //
 //UPON SIGN IN, LOAD USER INFO
+//  THIS IS THE MAIN OBJECTIVE NOW. NEED TO BUILD SYSTEM THAT ONCE USER LOGS IN, THAT USER IS GIVEN CREDENTIALS THAT ARE USED ACROSS THE SITE.
+//  AS OF NOW, ONCE SIGNED IN, THE USER HAS FREE REIGN AND NO DATA IS TIED TO USER. WHAT NEEDS TO HAPPEN IS THAT THERE ARE PERIODIC CHECKS ENSURING THAT THE USER
+//      IS STILL LOGGED IN AND THAT DATA IS BEING PROPERLY SAVED/LOADED FOR EACH USER.
 //
 //DROP DOWN BUTTONS FOR VIEW, MONTH, YEAR
 //  this is next to calendar so user can change to like a weekly (or even daily) view, and can change the month/year
