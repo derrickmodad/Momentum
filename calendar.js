@@ -397,7 +397,7 @@ function buildMonthYearSelection() {
     }
 
     yearSelect.value = currentYear;
-    monthSelect.value = currentMonth;
+    monthSelect.value = currentMonth + 1;
 }
 
 /*
