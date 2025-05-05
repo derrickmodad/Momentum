@@ -38,6 +38,7 @@
 //          on change of the dropdowns, we need to save what is in the items array, then rebuild the calendar, then fetch from storage for the selected month/year
 //--update: got the month/year dropdowns working, so user can now select other months and years to view them
 //          now just gotta focus on saving and loading data
+//  --noticed that some months cause the calendar to have an extra row, so some styling is needed for these to make the format consistent
 //
 // -----
 
