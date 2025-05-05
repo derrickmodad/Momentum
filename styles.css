@@ -38,6 +38,8 @@ body {
 
 .dateSelect {
     font-size: 1.5em;
+    border: none;
+    cursor: pointer;
 }
 
 #management {
