@@ -27,12 +27,17 @@
 //      I did notice that the email verification sending service is slow, something to think about 
 //
 //UPON SIGN IN, LOAD USER INFO
-//  THIS IS THE MAIN OBJECTIVE NOW. NEED TO BUILD SYSTEM THAT ONCE USER LOGS IN, THAT USER IS GIVEN CREDENTIALS THAT ARE USED ACROSS THE SITE.
+//  THIS IS A MAIN OBJECTIVE NOW. NEED TO BUILD SYSTEM THAT ONCE USER LOGS IN, THAT USER IS GIVEN CREDENTIALS THAT ARE USED ACROSS THE SITE.
 //  AS OF NOW, ONCE SIGNED IN, THE USER HAS FREE REIGN AND NO DATA IS TIED TO USER. WHAT NEEDS TO HAPPEN IS THAT THERE ARE PERIODIC CHECKS ENSURING THAT THE USER
 //      IS STILL LOGGED IN AND THAT DATA IS BEING PROPERLY SAVED/LOADED FOR EACH USER.
 //
 //DROP DOWN BUTTONS FOR VIEW, MONTH, YEAR
 //  this is next to calendar so user can change to like a weekly (or even daily) view, and can change the month/year
+//--update: got the dropdown buttons for month and year. now need to hook them up
+//          this can be done by building the buttons first, then in buildcalendar get the values from the dropdown to build a calendar.
+//          on change of the dropdowns, we need to save what is in the items array, then rebuild the calendar, then fetch from storage for the selected month/year
+//--update: got the month/year dropdowns working, so user can now select other months and years to view them
+//          now just gotta focus on saving and loading data
 //
 // -----
 
