@@ -1,6 +1,7 @@
 "use strict";
 
 buildCalendar();
+buildMonthYearSelection() 
 
 function buildCalendar() {
     let calendar = document.getElementById("calendar");
@@ -368,6 +369,35 @@ function determineBackGroundColor(bgc) {
         case "gray":
             return "lightgray";
     }
+}
+
+function buildMonthYearSelection() {
+    const monthSelect = document.getElementById("monthSelect");
+    const monthNames = ["January", "February", "March", "April", "May", "June", 
+        "July", "August", "September", "October", "November", "December"];
+    
+    monthNames.forEach((month, index) => {
+        let option = document.createElement("option");
+        option.value = index + 1;
+        option.textContent = month;
+        monthSelect.appendChild(option);
+    });
+
+    const yearSelect = document.getElementById("yearSelect");
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth();
+    const future = currentYear + 5;
+    const past = currentYear - 10;
+    for (let i = future; i >= past; i--) {
+        let option = document.createElement("option");
+        option.value = i;
+        option.textContent = i;
+        yearSelect.appendChild(option);
+    }
+
+    yearSelect.value = currentYear;
+    monthSelect.value = currentMonth;
 }
 
 /*
