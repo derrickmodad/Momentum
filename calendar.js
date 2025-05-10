@@ -35,22 +35,35 @@ function buildMonthYearSelection() {
     monthSelect.value = currentMonth + 1;
     selectedYear = yearSelect.value;
     selectedMonth = monthSelect.value - 1; //account for off by 1
-
-    monthSelect.addEventListener("change", () => {
-        selectedMonth = monthSelect.value - 1;
-        updateCalendarView();
-    });
-
-    yearSelect.addEventListener("change", () => {
-        selectedYear = yearSelect.value;
-        updateCalendarView();
-    });
 }
+
+document.getElementById("updateMonthYearButton").addEventListener("click", () => {
+    const monthSelect = document.getElementById("monthSelect");
+    const yearSelect = document.getElementById("yearSelect");
+    
+    //check for changes to month or year
+    let change = false;
+    if (selectedMonth != monthSelect.value - 1) {
+        selectedMonth = monthSelect.value - 1;
+        change = true;
+    }
+    if (selectedYear != yearSelect.value) {
+        selectedYear = yearSelect.value;
+        change = true;
+    }
+
+    if (change) {
+        updateCalendarView();
+    }
+});
 
 //this is gonna be the master function for building the calendar based on selected month/year, and also call the saving/querying functions in task.js
 function updateCalendarView() {
     document.getElementById("calendar").removeChild(document.getElementById("generatedCalendar"));
     buildCalendar();
+
+    //call change handler in task.js
+    masterChange();
 }
 
 function buildCalendar() {
