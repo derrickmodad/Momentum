@@ -36,10 +36,35 @@ body {
     padding-left: 10px;
 }
 
+#dateSelectDiv {
+    display: flex;
+    width: 35%;
+    justify-content: space-between;
+}
+
 .dateSelect {
     font-size: 1.5em;
-    border: none;
+    /* border: none; */
+    border-radius: 10px;
     cursor: pointer;
+}
+
+.button {
+    background-color: black;
+    color: white;
+    padding: 1em;
+    height: 0.5em;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    /* text-align: center; */
+}
+
+.button:hover {
+    cursor: pointer;
+    background-color: rgb(255, 255, 255);
+    color: black;
+    transition: 0.1s;
 }
 
 #management {
