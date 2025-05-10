@@ -145,11 +145,47 @@ function setupTaskCreationFormControls() {
     });
 }
 
-//sets up the global array that holds items for each day
+//sets up the global array that holds items for each day for initial current month year
 function setupDaysGlobal() {
     let numDays = new Date();
     numDays = new Date(numDays.getFullYear(), numDays.getMonth() + 1, 0).getDate();
 
+    for (let i = 0; i < numDays; i++) {
+        itemsForDays.push([]);
+        completedItemsForDays.push([]);
+    }
+}
+
+//function for handling the change of the month/year in calendar.js
+function masterChange() {
+    //need to save what is in the itemsForDays and completedItemsForDays arrays
+    saveItemArrays();
+
+    //need to load array with new month and year data
+    setupDaysGlobalParameterized(selectedMonth, selectedYear);
+}
+
+function saveItemArrays() {
+    //will save the items in the itemsForDays and completedItemsForDays arrays
+
+    //the items will share the same table
+    //remember completed items will have the bool completed set to yes on insert
+    for (let i = 0; i < itemsForDays.length; i++) {
+        if (itemsForDays[i].length !== 0) {
+            console.log("something in day" + (i + 1));
+        }
+    }
+}
+
+//parameterized version for setup of array for different months/years
+function setupDaysGlobalParameterized(month, year) {
+    let numDays = new Date(year, month + 1, 0).getDate();
+    itemsForDays = [];
+    completedItemsForDays = [];
+
+    //this is probably gonna be where the queries to the database are
+
+    //if no return of data, make empty arrays
     for (let i = 0; i < numDays; i++) {
         itemsForDays.push([]);
         completedItemsForDays.push([]);
