@@ -159,13 +159,13 @@ function setupDaysGlobal() {
 //function for handling the change of the month/year in calendar.js
 async function masterChange() {
     //need to save what is in the itemsForDays and completedItemsForDays arrays
-    await saveItemArrays();
+    await saveItemArraysOnChange();
 
     //need to load array with new month and year data
     setupDaysGlobalParameterized(selectedMonth, selectedYear);
 }
 
-async function saveItemArrays() {
+async function saveItemArraysOnChange() {
     const {data} = await supabase.auth.getUser();
     const user = data.user;
 
@@ -181,12 +181,24 @@ async function saveItemArrays() {
     }
 }
 
+/**
+ * Now need to load from database
+ * Also need autosave function
+ * 
+ * the overall consensus is to try and keep the queries to the db low since they are rate limited
+ * so inserts and queries need to be kept to a minimum
+ */
+
+
+
+
+
+//this may need to be adapted to fit other insert scenarios
+//as of now it is only useful for when the month/year is changed
 function packArray(arr, complete, user) {
     let insertList = [];
-    console.log(arr);
     for (let i = 0; i < arr.length; i++) {
         if (arr[i].length !== 0) {
-            console.log("found items in day " + (i + 1));
             for (let it of arr[i]) {
                 let itemOBJ = {};
                 itemOBJ.user_id = user.id;
