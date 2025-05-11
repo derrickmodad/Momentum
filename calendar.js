@@ -64,12 +64,21 @@ document.getElementById("updateMonthYearButton").addEventListener("click", () =>
 });
 
 //this is gonna be the master function for building the calendar based on selected month/year, and also call the saving/querying functions in task.js
-function updateCalendarView() {
+async function updateCalendarView() {
     document.getElementById("calendar").removeChild(document.getElementById("generatedCalendar"));
+    
+    //call change handler in task.js
+
+    let loading = document.getElementById("loading");
+    loading.classList.remove("hidden");
+    await masterChange();
+    loading.classList.add("hidden");
     buildCalendar();
 
-    //call change handler in task.js
-    masterChange();
+    let numDaysInMonth = getDaysInMonth(selectedYear, selectedMonth);
+    for (let i = 0; i < numDaysInMonth; i++) {
+        displayItems(i + 1);
+    }
 }
 
 function buildCalendar() {

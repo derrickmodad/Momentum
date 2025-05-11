@@ -133,9 +133,11 @@ function setupTaskCreationFormControls() {
     finish.addEventListener("click", function() {
         if (currentlyEditing !== null) {
             itemsForDays[currentlyEditing.day].splice(currentlyEditing.index, 1);
+            generateNewTask();
             currentlyEditing = null;
+        } else {
+            generateNewTask();
         }
-        generateNewTask();
         form.reset();
         document.getElementById("eventOptions").className = "hidden";
         document.getElementById("taskOptions").className = "hidden";
@@ -162,7 +164,9 @@ async function masterChange() {
     await saveItemArraysOnChange();
 
     //need to load array with new month and year data
-    setupDaysGlobalParameterized(selectedMonth, selectedYear);
+    await setupDaysGlobalParameterized(selectedMonth, selectedYear);
+
+    // displayItems
 }
 
 async function saveItemArraysOnChange() {
@@ -174,7 +178,7 @@ async function saveItemArraysOnChange() {
     let insertList = insert1.concat(insert2);
 
     if (insertList.length !== 0) {
-        const { data, error } = await supabase.from('tasks').insert(insertList);
+        const { data, error } = await supabase.from('tasks').upsert(insertList);
         if (error) {
             console.log(error);
         }
@@ -182,15 +186,17 @@ async function saveItemArraysOnChange() {
 }
 
 /**
- * Now need to load from database
+ * Done - Now need to load from database
+ * 
+ * on finish, insert new item
+ * on complete item, upsert complete status for item
+ * on undo complete item, upsert complete status for item
  * Also need autosave function
+ * need to load on sign in
  * 
  * the overall consensus is to try and keep the queries to the db low since they are rate limited
  * so inserts and queries need to be kept to a minimum
  */
-
-
-
 
 
 //this may need to be adapted to fit other insert scenarios
@@ -227,19 +233,55 @@ function packArray(arr, complete, user) {
 }
 
 //parameterized version for setup of array for different months/years
-function setupDaysGlobalParameterized(month, year) {
+async function setupDaysGlobalParameterized(month, year) {
     let numDays = new Date(year, month + 1, 0).getDate();
     itemsForDays = [];
     completedItemsForDays = [];
 
-    //this is probably gonna be where the queries to the database are
-
-    //if no return of data, make empty arrays
     for (let i = 0; i < numDays; i++) {
-        itemsForDays.push([]);
-        completedItemsForDays.push([]);
+        let { data: tasks, error } = await supabase.from('tasks')
+        .select()
+        .eq('year', selectedYear)
+        .eq('month', selectedMonth)
+        .eq('day', i);
+        if (tasks.length !== 0) {
+            let [todo, completed] = unpackArray(tasks);
+            itemsForDays.push(todo);
+            completedItemsForDays.push(completed);
+        } else {
+            itemsForDays.push([]);
+            completedItemsForDays.push([]);
+        }
     }
 }
+
+function unpackArray(tasks) {
+    let itemArray = [];
+    let completedItemArray = [];
+    for (let i = 0; i < tasks.length; i++) {
+        let t = tasks[i];
+        if (tasks[i].type === "task") {
+            let task = new Task(t.title, t.description, t.color, t.priority, t.deadline);
+            task.id = t.taskID;
+            if (t.completed) {
+                completedItemArray.push(task);
+            } else {
+                itemArray.push(task);
+            }
+        } else {
+            let event = new Event(t.title, t.description, t.color, t.location, t.start_time, t.end_time);
+            event.id = t.taskID;
+            if (t.completed) {
+                completedItemArray.push(event);
+            } else {
+                itemArray.push(event);
+            }
+        }
+    }
+    // console.log(itemArray);
+    return [itemArray, completedItemArray];
+}
+
 
 function findDay() {
     let date = document.getElementById("taskBarHeaderDay").innerHTML;
@@ -278,6 +320,10 @@ function generateNewTask() {
         newItem = new Task(title, desc, color, priority, deadline);
     }
 
+    if (currentlyEditing) {
+        newItem.id = currentlyEditing.item.id;
+    }
+
     itemsForDays[day].push(newItem);
     sortItems(day);
     console.log(newItem);
@@ -296,7 +342,7 @@ function editItem(itemID) {
     document.getElementById("addTaskButton").disabled = true;
     toggleTaskMenuVisibility();
     sideLoadForm(item);
-    currentlyEditing = {index, day};
+    currentlyEditing = {index, day, item};
 }
 
 function sideLoadForm(item) {
