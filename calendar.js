@@ -2,6 +2,8 @@
 
 var selectedYear;
 var selectedMonth;
+var prevSelectedYear;
+var prevSelectedMonth;
 buildMonthYearSelection(); 
 
 buildCalendar();
@@ -34,7 +36,9 @@ function buildMonthYearSelection() {
     yearSelect.value = currentYear;
     monthSelect.value = currentMonth + 1;
     selectedYear = yearSelect.value;
-    selectedMonth = monthSelect.value - 1; //account for off by 1
+    selectedMonth = monthSelect.value - 1; //account for off by 1'
+    prevSelectedYear = selectedYear;
+    prevSelectedMonth = selectedMonth;
 }
 
 document.getElementById("updateMonthYearButton").addEventListener("click", () => {
@@ -44,10 +48,12 @@ document.getElementById("updateMonthYearButton").addEventListener("click", () =>
     //check for changes to month or year
     let change = false;
     if (selectedMonth != monthSelect.value - 1) {
+        prevSelectedMonth = selectedMonth;
         selectedMonth = monthSelect.value - 1;
         change = true;
     }
     if (selectedYear != yearSelect.value) {
+        prevSelectedYear = selectedYear;
         selectedYear = yearSelect.value;
         change = true;
     }
