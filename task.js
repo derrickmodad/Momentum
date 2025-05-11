@@ -157,24 +157,61 @@ function setupDaysGlobal() {
 }
 
 //function for handling the change of the month/year in calendar.js
-function masterChange() {
+async function masterChange() {
     //need to save what is in the itemsForDays and completedItemsForDays arrays
-    saveItemArrays();
+    await saveItemArrays();
 
     //need to load array with new month and year data
     setupDaysGlobalParameterized(selectedMonth, selectedYear);
 }
 
-function saveItemArrays() {
-    //will save the items in the itemsForDays and completedItemsForDays arrays
+async function saveItemArrays() {
+    const {data} = await supabase.auth.getUser();
+    const user = data.user;
 
-    //the items will share the same table
-    //remember completed items will have the bool completed set to yes on insert
-    for (let i = 0; i < itemsForDays.length; i++) {
-        if (itemsForDays[i].length !== 0) {
-            console.log("something in day" + (i + 1));
+    let insert1 = packArray(itemsForDays, false, user);
+    let insert2 = packArray(completedItemsForDays, true, user);
+    let insertList = insert1.concat(insert2);
+
+    if (insertList.length !== 0) {
+        const { data, error } = await supabase.from('tasks').insert(insertList);
+        if (error) {
+            console.log(error);
         }
     }
+}
+
+function packArray(arr, complete, user) {
+    let insertList = [];
+    console.log(arr);
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i].length !== 0) {
+            console.log("found items in day " + (i + 1));
+            for (let it of arr[i]) {
+                let itemOBJ = {};
+                itemOBJ.user_id = user.id;
+                itemOBJ.taskID = it.id; 
+                itemOBJ.title = it.title; 
+                itemOBJ.description = it.desc;
+                itemOBJ.color = it.color;
+                itemOBJ.type = it.type;
+                if (it.type === "task") {
+                    itemOBJ.priority = it.priority;
+                    itemOBJ.deadline = it.deadline;
+                } else {
+                    itemOBJ.location = it.location;
+                    itemOBJ.start_time = it.startTime;
+                    itemOBJ.end_time = it.endTime;
+                }
+                itemOBJ.completed = complete;
+                itemOBJ.year = prevSelectedYear;
+                itemOBJ.month = prevSelectedMonth;
+                itemOBJ.day = i;
+                insertList.push(itemOBJ);
+            }
+        }
+    }
+    return insertList;
 }
 
 //parameterized version for setup of array for different months/years
