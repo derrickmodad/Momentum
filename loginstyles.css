@@ -111,3 +111,6 @@ body {
     display: none;
 }
 
+#verifyEmailDiv {
+    text-align: center;
+}

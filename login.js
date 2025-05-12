@@ -19,7 +19,6 @@ loginForm.addEventListener("submit", async (e) => {
       document.getElementById("errorDiv").classList.remove("hidden");
       errorTextVisible = true;
     } else {
-      console.log("Logged in!");
       window.location.href = "index.html";
     }
 });
@@ -45,11 +44,22 @@ signUpForm.addEventListener("submit", async(e) => {
   if (error) {
     console.log("Sign up failed: " + error.message);
   } else {
-    console.log("Signed Up!");
-    window.location.href = "index.html";
+    verifyEmail();
   }
-
 });
+
+function verifyEmail() {
+  signUpForm.innerHTML = "";
+  document.getElementById("verifyEmailDiv").classList.remove("hidden");
+  const verificationInterval = setInterval(async () => {
+    const {data} = await supabase.auth.getUser();
+    // console.log(data.user.email_confirmed_at);
+    if (data.user && data.user.email_confirmed_at !== null) {
+      clearInterval(verificationInterval);
+      window.location.href = "index.html";
+    }
+  }, 5000);
+}
 
 document.getElementById("loginEmailInput").addEventListener("input", () => {
   if (errorTextVisible) {
