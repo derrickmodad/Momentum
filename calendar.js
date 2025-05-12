@@ -8,10 +8,9 @@ buildMonthYearSelection();
 
 initializeCalendar();
 
-async function initializeCalendar() {
+function initializeCalendar() {
     buildCalendar();
-    await updateCalendarView();
-    focusDay(new Date().getDate());
+    updateCalendarView();
 }
 
 function buildMonthYearSelection() {
@@ -80,6 +79,13 @@ async function updateCalendarView() {
     let numDaysInMonth = getDaysInMonth(selectedYear, selectedMonth);
     for (let i = 0; i < numDaysInMonth; i++) {
         displayItems(i + 1);
+    }
+
+    let today = new Date();
+    if (today.getFullYear() == selectedYear && today.getMonth() == selectedMonth) {
+        focusDay(today.getDate());
+    } else {
+        focusDay(1);
     }
 }
 
