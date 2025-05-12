@@ -188,20 +188,6 @@ async function saveItemArraysOnChange() {
     }
 }
 
-/**
- * Done - Now need to load from database
- * 
- * on finish, insert new item
- * on complete item, upsert complete status for item
- * on undo complete item, upsert complete status for item
- * Also need autosave function
- * need to load on sign in
- * 
- * the overall consensus is to try and keep the queries to the db low since they are rate limited
- * so inserts and queries need to be kept to a minimum
- */
-
-
 //this may need to be adapted to fit other insert scenarios
 //as of now it is only useful for when the month/year is changed
 function packArray(arr, complete, user) {
