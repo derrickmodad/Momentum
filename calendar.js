@@ -482,25 +482,19 @@ function determineBackGroundColor(bgc) {
     }
 }
 
-/*
+function toggleDropdown() {
+  document.getElementById("managementDropdown").classList.toggle("show");
+}
 
---------------
-|  |         |
-|  |         |
---------------
+document.addEventListener("click", function (e) {
+  if (!e.target.closest("#managementDropdown")) {
+    document.getElementById("managementDropdown").classList.remove("show");
+  }
+});
 
-div structure? color on left, info about item on right
-
-structure for items:
-
-div id='itemDiv'
-    div id='left' color=passed color from form
-        p id='start'
-        p id='end/deadline'
-    div id='right'
-        div id='upper'
-            h3 id='title'
-            p id='location/priority'
-        div id='lower'
-            p id='desc'
-*/
+document.getElementById("logout").addEventListener("click", async function(e) {
+  e.preventDefault();
+  const { error } = await supabase.auth.signOut();
+  if (!error) 
+    window.location.href = "login.html";
+});

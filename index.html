@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="images/momentumFavicon.ico">
-    <!-- <script src="script.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script src="config.js"></script>
     <script src="supabase.js"></script>
@@ -24,10 +23,16 @@
                     <button id="updateMonthYearButton" class="button">Apply</button>
                 </div>
                 <div id="management">
-                    <button id="managementButton">
-                        <img id="managementButtonImage" src="images/MomentumLogoHalf.png" alt="Momentum">
-                        ▼
-                    </button>
+                    <div id="managementDropdown" class="dropdown">
+                        <button id="managementButton" onclick="toggleDropdown()">
+                            <img id="managementButtonImage" src="images/MomentumLogoHalf.png" alt="Momentum">
+                            ▼
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="#">Settings</a>
+                            <a href="#" id="logout">Log out</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
