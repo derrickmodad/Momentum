@@ -6,7 +6,13 @@ var prevSelectedYear;
 var prevSelectedMonth;
 buildMonthYearSelection(); 
 
-buildCalendar();
+initializeCalendar();
+
+async function initializeCalendar() {
+    buildCalendar();
+    await updateCalendarView();
+    focusDay(new Date().getDate());
+}
 
 function buildMonthYearSelection() {
     const monthSelect = document.getElementById("monthSelect");
@@ -36,7 +42,7 @@ function buildMonthYearSelection() {
     yearSelect.value = currentYear;
     monthSelect.value = currentMonth + 1;
     selectedYear = yearSelect.value;
-    selectedMonth = monthSelect.value - 1; //account for off by 1'
+    selectedMonth = monthSelect.value - 1; //account for off by 1
     prevSelectedYear = selectedYear;
     prevSelectedMonth = selectedMonth;
 }
@@ -66,19 +72,23 @@ document.getElementById("updateMonthYearButton").addEventListener("click", () =>
 //this is gonna be the master function for building the calendar based on selected month/year, and also call the saving/querying functions in task.js
 async function updateCalendarView() {
     document.getElementById("calendar").removeChild(document.getElementById("generatedCalendar"));
-    
-    //call change handler in task.js
-
-    let loading = document.getElementById("loading");
-    loading.classList.remove("hidden");
+    loading(true);
     await masterChange();
-    loading.classList.add("hidden");
+    loading(false);
     buildCalendar();
 
     let numDaysInMonth = getDaysInMonth(selectedYear, selectedMonth);
     for (let i = 0; i < numDaysInMonth; i++) {
         displayItems(i + 1);
     }
+}
+
+function loading(toggle) {
+    let loading = document.getElementById("loading");
+    if (toggle) 
+        loading.classList.remove("hidden");
+    else 
+        loading.classList.add("hidden");
 }
 
 function buildCalendar() {
