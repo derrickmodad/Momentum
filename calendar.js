@@ -1,11 +1,109 @@
 "use strict";
 
-buildCalendar();
+var selectedYear;
+var selectedMonth;
+var prevSelectedYear;
+var prevSelectedMonth;
+buildMonthYearSelection(); 
+
+initializeCalendar();
+
+function initializeCalendar() {
+    buildCalendar();
+    updateCalendarView();
+}
+
+function buildMonthYearSelection() {
+    const monthSelect = document.getElementById("monthSelect");
+    const monthNames = ["January", "February", "March", "April", "May", "June", 
+        "July", "August", "September", "October", "November", "December"];
+    
+    monthNames.forEach((month, index) => {
+        let option = document.createElement("option");
+        option.value = index + 1;
+        option.textContent = month;
+        monthSelect.appendChild(option);
+    });
+
+    const yearSelect = document.getElementById("yearSelect");
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth();
+    const future = currentYear + 5;
+    const past = currentYear - 10;
+    for (let i = future; i >= past; i--) {
+        let option = document.createElement("option");
+        option.value = i;
+        option.textContent = i;
+        yearSelect.appendChild(option);
+    }
+
+    yearSelect.value = currentYear;
+    monthSelect.value = currentMonth + 1;
+    selectedYear = yearSelect.value;
+    selectedMonth = monthSelect.value - 1; //account for off by 1
+    prevSelectedYear = selectedYear;
+    prevSelectedMonth = selectedMonth;
+}
+
+document.getElementById("updateMonthYearButton").addEventListener("click", () => {
+    const monthSelect = document.getElementById("monthSelect");
+    const yearSelect = document.getElementById("yearSelect");
+    
+    //check for changes to month or year
+    let change = false;
+    if (selectedMonth != monthSelect.value - 1) {
+        prevSelectedMonth = selectedMonth;
+        selectedMonth = monthSelect.value - 1;
+        change = true;
+    }
+    if (selectedYear != yearSelect.value) {
+        prevSelectedYear = selectedYear;
+        selectedYear = yearSelect.value;
+        change = true;
+    }
+
+    if (change) {
+        updateCalendarView();
+    }
+});
+
+//this is gonna be the master function for building the calendar based on selected month/year, and also call the saving/querying functions in task.js
+async function updateCalendarView() {
+    document.getElementById("calendar").removeChild(document.getElementById("generatedCalendar"));
+    loading(true);
+    await masterChange();
+    loading(false);
+    buildCalendar();
+
+    let numDaysInMonth = getDaysInMonth(selectedYear, selectedMonth);
+    for (let i = 0; i < numDaysInMonth; i++) {
+        displayItems(i + 1);
+    }
+
+    let today = new Date();
+    if (today.getFullYear() == selectedYear && today.getMonth() == selectedMonth) {
+        focusDay(today.getDate());
+    } else {
+        focusDay(1);
+    }
+}
+
+function loading(toggle) {
+    let loading = document.getElementById("loading");
+    if (toggle) 
+        loading.classList.remove("hidden");
+    else 
+        loading.classList.add("hidden");
+}
 
 function buildCalendar() {
     let calendar = document.getElementById("calendar");
+
     let today = new Date();
-    let numDaysInMonth = getDaysInMonth(today.getFullYear(), today.getMonth());
+
+    let numDaysInMonth = getDaysInMonth(selectedYear, selectedMonth);
+
     let generatedCalendar = document.createElement("table");
     generatedCalendar.id = "generatedCalendar";
 
@@ -20,14 +118,17 @@ function buildCalendar() {
     
     row = document.createElement("tr");
 
-    let firstDay = new Date(today.getFullYear(), today.getMonth(), 1).getDay();  
+    let firstDay = new Date(selectedYear, selectedMonth, 1).getDay();  
     
     for (let i = 0; i < firstDay; i++) {
         let emptyCell = document.createElement("td");
         row.appendChild(emptyCell);
     }
-    
+    let currentDay = today;
     today = today.getDate();
+
+    let currentMonthYear = currentDay.getFullYear() == selectedYear && currentDay.getMonth() == selectedMonth;
+
     for (let i = 1; i <= numDaysInMonth; i++) {
         let newDay = document.createElement("td");
         newDay.innerHTML = i;
@@ -37,8 +138,13 @@ function buildCalendar() {
             focusDay(i);
         });
 
-        if (i === today) {
+        if (currentMonthYear && i === today) {
             newDay.classList.add("calendarCellActive");
+            newDay.classList.add("activeDay");
+            focusDay(i);
+        }
+
+        if (!currentMonthYear && i === 1) {
             newDay.classList.add("activeDay");
             focusDay(i);
         }
@@ -56,13 +162,18 @@ function buildCalendar() {
     }
 
     calendar.appendChild(generatedCalendar);
-    styleCurrentDay(today);
+
+    //check to see if current day is visible on calendar
+    if (currentMonthYear) {
+        styleCurrentDay(today);
+    }   
 }
 
 function getDaysInMonth(year, month) {
     return new Date(year, month + 1, 0).getDate();
 }
 
+//this function is called to add the blue circle to highlight the current day of the month
 function styleCurrentDay(day) {
     let calDay = document.getElementById("calendarDay" + day);
     calDay.innerHTML = "";
@@ -72,6 +183,7 @@ function styleCurrentDay(day) {
     calDay.appendChild(dayDiv);
 }
 
+//this function is called to add the styling for the day the user has selected (currently the black border to signify the user chose that day)
 function styleActiveDay(day) {
     let calDay = document.getElementById("calendarDay" + day);
     let activeDay = document.querySelector(".activeDay");
@@ -81,10 +193,10 @@ function styleActiveDay(day) {
         calDay.classList.add("activeDay");
 }
 
+//this function is called to update the header for the item view on the right side and style the day (essentially the master function for updating the selected day)
 function focusDay(day) {
     let header = document.getElementById("taskBarHeaderDay");
-    let dateForHeader = new Date();
-    dateForHeader = new Date(dateForHeader.getFullYear(), dateForHeader.getMonth(), day);
+    let dateForHeader = new Date(selectedYear, selectedMonth, day);
     
     const options = {
         weekday: "long",
@@ -370,25 +482,19 @@ function determineBackGroundColor(bgc) {
     }
 }
 
-/*
+function toggleDropdown() {
+  document.getElementById("managementDropdown").classList.toggle("show");
+}
 
---------------
-|  |         |
-|  |         |
---------------
+document.addEventListener("click", function (e) {
+  if (!e.target.closest("#managementDropdown")) {
+    document.getElementById("managementDropdown").classList.remove("show");
+  }
+});
 
-div structure? color on left, info about item on right
-
-structure for items:
-
-div id='itemDiv'
-    div id='left' color=passed color from form
-        p id='start'
-        p id='end/deadline'
-    div id='right'
-        div id='upper'
-            h3 id='title'
-            p id='location/priority'
-        div id='lower'
-            p id='desc'
-*/
+document.getElementById("logout").addEventListener("click", async function(e) {
+  e.preventDefault();
+  const { error } = await supabase.auth.signOut();
+  if (!error) 
+    window.location.href = "login.html";
+});

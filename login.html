@@ -6,22 +6,72 @@
     <link rel="stylesheet" href="loginstyles.css">
     <link rel="icon" type="image/x-icon" href="images/momentumFavicon.ico">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="config.js"></script>
     <script src="supabase.js"></script>
     <script src="login.js" defer></script>
     <title>Momentum: Log In</title>
 </head>
 <body>
-    <div id="upperDiv">
-        <img src="images/MomentumLogoFull.png" alt="Momentum" id="loginLogo">
-    </div>
-    <div id="lowerDiv">
-        <form id="loginForm">
-            <label for="emailInput">Email</label>
-            <input type="email" name="emailInput" id="emailInput">
-            <label for="passwordInput">Password</label>
-            <input type="text" name="passwordInput" id="passwordInput">
-            <button type="submit">Log In</button>
-        </form>
+    <div id="mainContent">
+        <div id="upperDiv">
+            <img src="images/MomentumLogoFull.png" alt="Momentum" id="loginLogo">
+        </div>
+        <div id="loginDiv" class="userAccessFormDiv">
+            <form id="loginForm" class="userAccessForm">
+                <h2>Log In</h2>
+                <div id="emailDiv" class="formItem">
+                    <label for="loginEmailInput">Email</label>
+                    <input type="email" name="loginEmailInput" id="loginEmailInput" required>
+                </div>
+                <div id="passwordDiv" class="formItem">
+                    <label for="loginPasswordInput">Password</label>
+                    <div class="passwordInputWrapper">
+                        <input type="password" name="loginPasswordInput" id="loginPasswordInput" class="passwordInput" minlength="8" maxlength="64" required>
+                        <span class="toggleShowPassword">SHOW</span>
+                    </div>
+                </div>
+                <div id="errorDiv" class="hidden">
+                    <p style="color: red;">Invalid Email or Password</p>
+                </div>
+                <button type="submit" class="formControlButton">Log In</button>
+                <p>Don't have an account? <a class="changeFormHyperlink" onclick="toggleForm(1)">Sign Up</a></p>
+            </form>
+        </div>
+        <div id="signUpDiv" class="userAccessFormDiv hidden">
+            <form id="signUpForm" class="userAccessForm">
+                <h2>Sign Up</h2>
+                <div id="signupEmailDiv" class="formItem">
+                    <label for="signupEmailInput">Email</label>
+                    <input type="email" name="signupEmailInput" id="signupEmailInput" required>
+                </div>
+                <div id="signupName" class="formItem">
+                    <label for="signupNameInput">Name</label>
+                    <input type="text" name="signupNameInput" id="signupNameInput" required>
+                </div>
+                <div id="signupPasswordDiv" class="formItem">
+                    <label for="signupPasswordInput">Password</label>
+                    <div class="passwordInputWrapper">
+                        <input type="password" name="signupPasswordInput" id="signupPasswordInput" class="passwordInput" minlength="8" maxlength="64" required>
+                        <span class="toggleShowPassword">SHOW</span>
+                    </div>
+                </div>
+                <div id="signupConfirmPasswordDiv" class="formItem">
+                    <label for="signupConfirmPasswordInput">Confirm Password</label>
+                    <div class="passwordInputWrapper">
+                        <input type="password" name="signupConfirmPasswordInput" id="signupConfirmPasswordInput" class="passwordInput" minlength="8" maxlength="64" required>
+                        <span class="toggleShowPassword">SHOW</span>
+                    </div>
+                </div>
+                <button type="submit" class="formControlButton">Sign Up</button>
+                <p>Already have an account? <a class="changeFormHyperlink" onclick="toggleForm(2)">Log in</a></p>
+            </form>
+        </div>
+        <div id="verifyEmailDiv" class="hidden">
+            <h2>Thanks for signing up!</h2>
+            <p>Before continuing, you must verify your email.</p>
+            <p>Please check your email's inbox for the email we sent you.</p>
+            <p>Didn't receive an email? <a href="#" id="resendVerificationEmail">Resend it</a></p>
+        </div>
     </div>
 </body>
 </html>

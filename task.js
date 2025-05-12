@@ -130,22 +130,27 @@ function setupTaskCreationFormControls() {
 
     //finish button
     let finish = document.getElementById("finishTaskCreation");
-    finish.addEventListener("click", function() {
+    finish.addEventListener("click", async function() {
         if (currentlyEditing !== null) {
             itemsForDays[currentlyEditing.day].splice(currentlyEditing.index, 1);
+            generateNewTask();
             currentlyEditing = null;
+        } else {
+            generateNewTask();
         }
-        generateNewTask();
         form.reset();
         document.getElementById("eventOptions").className = "hidden";
         document.getElementById("taskOptions").className = "hidden";
         toggleTaskMenuVisibility();
         document.getElementById("addTaskButton").disabled = false;
+
+        await masterSave();
+
         displayItems(findDay());
     });
 }
 
-//sets up the global array that holds items for each day
+//sets up the global array that holds items for each day for initial current month year
 function setupDaysGlobal() {
     let numDays = new Date();
     numDays = new Date(numDays.getFullYear(), numDays.getMonth() + 1, 0).getDate();
@@ -155,6 +160,117 @@ function setupDaysGlobal() {
         completedItemsForDays.push([]);
     }
 }
+
+//function for handling the change of the month/year in calendar.js
+async function masterChange() {
+    //need to load array with new month and year data
+    await setupDaysGlobalParameterized(selectedMonth, selectedYear);
+}
+
+async function masterSave() {
+    //need to save what is in the itemsForDays and completedItemsForDays arrays
+    await saveItemArraysOnChange();
+}
+
+async function saveItemArraysOnChange() {
+    const {data} = await supabase.auth.getUser();
+    const user = data.user;
+
+    let insert1 = packArray(itemsForDays, false, user);
+    let insert2 = packArray(completedItemsForDays, true, user);
+    let insertList = insert1.concat(insert2);
+
+    if (insertList.length !== 0) {
+        const { data, error } = await supabase.from('tasks').upsert(insertList);
+        if (error) {
+            console.log(error);
+        }
+    }
+}
+
+//this may need to be adapted to fit other insert scenarios
+//as of now it is only useful for when the month/year is changed
+function packArray(arr, complete, user) {
+    let insertList = [];
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i].length !== 0) {
+            for (let it of arr[i]) {
+                let itemOBJ = {};
+                itemOBJ.user_id = user.id;
+                itemOBJ.taskID = it.id; 
+                itemOBJ.title = it.title; 
+                itemOBJ.description = it.desc;
+                itemOBJ.color = it.color;
+                itemOBJ.type = it.type;
+                if (it.type === "task") {
+                    itemOBJ.priority = it.priority;
+                    itemOBJ.deadline = it.deadline;
+                } else {
+                    itemOBJ.location = it.location;
+                    itemOBJ.start_time = it.startTime;
+                    itemOBJ.end_time = it.endTime;
+                }
+                itemOBJ.completed = complete;
+                itemOBJ.year = selectedYear;
+                itemOBJ.month = selectedMonth;
+                itemOBJ.day = i;
+                insertList.push(itemOBJ);
+            }
+        }
+    }
+    return insertList;
+}
+
+//parameterized version for setup of array for different months/years
+async function setupDaysGlobalParameterized(month, year) {
+    let numDays = new Date(year, month + 1, 0).getDate();
+    itemsForDays = [];
+    completedItemsForDays = [];
+
+    for (let i = 0; i < numDays; i++) {
+        let { data: tasks, error } = await supabase.from('tasks')
+        .select()
+        .eq('year', selectedYear)
+        .eq('month', selectedMonth)
+        .eq('day', i);
+        if (tasks.length !== 0) {
+            let [todo, completed] = unpackArray(tasks);
+            itemsForDays.push(todo);
+            completedItemsForDays.push(completed);
+        } else {
+            itemsForDays.push([]);
+            completedItemsForDays.push([]);
+        }
+    }
+}
+
+function unpackArray(tasks) {
+    let itemArray = [];
+    let completedItemArray = [];
+    for (let i = 0; i < tasks.length; i++) {
+        let t = tasks[i];
+        if (tasks[i].type === "task") {
+            let task = new Task(t.title, t.description, t.color, t.priority, t.deadline);
+            task.id = t.taskID;
+            if (t.completed) {
+                completedItemArray.push(task);
+            } else {
+                itemArray.push(task);
+            }
+        } else {
+            let event = new Event(t.title, t.description, t.color, t.location, t.start_time, t.end_time);
+            event.id = t.taskID;
+            if (t.completed) {
+                completedItemArray.push(event);
+            } else {
+                itemArray.push(event);
+            }
+        }
+    }
+    // console.log(itemArray);
+    return [itemArray, completedItemArray];
+}
+
 
 function findDay() {
     let date = document.getElementById("taskBarHeaderDay").innerHTML;
@@ -193,6 +309,10 @@ function generateNewTask() {
         newItem = new Task(title, desc, color, priority, deadline);
     }
 
+    if (currentlyEditing) {
+        newItem.id = currentlyEditing.item.id;
+    }
+
     itemsForDays[day].push(newItem);
     sortItems(day);
     console.log(newItem);
@@ -211,7 +331,7 @@ function editItem(itemID) {
     document.getElementById("addTaskButton").disabled = true;
     toggleTaskMenuVisibility();
     sideLoadForm(item);
-    currentlyEditing = {index, day};
+    currentlyEditing = {index, day, item};
 }
 
 function sideLoadForm(item) {
@@ -236,7 +356,7 @@ function sideLoadForm(item) {
 }
 
 //maybe combine completeItem and undoCompleteItem into one
-function completeItem(id) {
+async function completeItem(id) {
     //find item to be removed
     id = Number(id);
     let day = findDay();
@@ -253,13 +373,14 @@ function completeItem(id) {
     if (index !== -1) {
         completedItemsForDays[day - 1].push(items[index]);
         itemsForDays[day - 1].splice(index, 1);
+        await masterSave();
         displayItems(day);
     } else {
         console.log("could not find " + id + " in day " + day + "!");
     }
 }
 
-function undoCompleteItem(id) {
+async function undoCompleteItem(id) {
     //find item to be removed
     id = Number(id);
     let day = findDay();
@@ -277,6 +398,7 @@ function undoCompleteItem(id) {
         itemsForDays[day - 1].push(items[index]);
         sortItems(day - 1);
         completedItemsForDays[day - 1].splice(index, 1);
+        await masterSave();
         displayItems(day);
     } else {
         console.log("could not find " + id + " in day " + day + "!");

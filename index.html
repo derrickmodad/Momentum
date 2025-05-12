@@ -5,8 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <!-- <script src="script.js"></script> -->
+    <link rel="icon" type="image/x-icon" href="images/momentumFavicon.ico">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="config.js"></script>
     <script src="supabase.js"></script>
     <script src="task.js" defer></script>
     <script src="calendar.js" defer></script>
@@ -16,12 +17,28 @@
     <div id="leftMain">
         <div id="upperLeft">
             <div id="header">
-                <p>placeholder</p>
-                <p>placeholder</p>
+                <div id="dateSelectDiv">
+                    <select name="monthSelect" id="monthSelect" class="dateSelect"></select>
+                    <select name="yearSelect" id="yearSelect" class="dateSelect"></select>
+                    <button id="updateMonthYearButton" class="button">Apply</button>
+                </div>
+                <div id="management">
+                    <div id="managementDropdown" class="dropdown">
+                        <button id="managementButton" onclick="toggleDropdown()">
+                            <img id="managementButtonImage" src="images/MomentumLogoHalf.png" alt="Momentum">
+                            ▼
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="#">Settings</a>
+                            <a href="#" id="logout">Log out</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div id="bottomLeft">
             <div id="mainBody">
+                <div id="loading" class="hidden">Loading...</div>
                 <div id="calendar"></div>
             </div>
         </div>

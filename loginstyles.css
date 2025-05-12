@@ -1,6 +1,19 @@
+html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 body {
     background-color: rgb(93, 92, 92);
-    display: block;
+    display: flex;
+    align-items: center;
+    height: 99vh;
+}
+
+#mainContent {
+    background-color: white;
+    border-radius: 10px;
+    width: 30%;
+    margin: auto;
 }
 
 #upperDiv {
@@ -13,24 +26,91 @@ body {
 }
 
 #loginLogo {
-    width: 30%;
-    border-radius: 10px;
-    padding: 3%;
-    border: 2px solid black;
+    width: 60%;
     background-color: white;
+    padding: 10%;
 }
 
-#lowerDiv {
-    /* width: 40%; */
-    border: 3px solid red;
+.userAccessFormDiv {
+    /* border: 2px solid black; */
     border-radius: 10px;
-    display: flex;
-    justify-content: center;
     background-color: white;
+    width: 90%;
     margin: auto;
+    margin-top: 2%;
 }
 
-#loginForm {
-    display: block;
-    background-color: aqua;
+.userAccessForm {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.formItem {
+    width: 80%;
+    margin: 0 auto 3% auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.formItem label {
+    text-align: center;
+    margin-bottom: 0.5em;
+}
+
+.formItem input {
+    width: 100%;
+    padding: 0.5em;
+    box-sizing: border-box;
+}
+
+.passwordInputWrapper {
+    position: relative;
+    width: fit-content;
+    display: inline-block;
+    width: 100%;
+}
+  
+.toggleShowPassword {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 0.7em;
+    color: gray;
+    user-select: none;
+}
+
+.formControlButton {
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    padding: 1em;
+    margin: 3% auto 0 auto;
+    width: 50%;
+}
+
+.formControlButton:hover {
+    cursor: pointer;
+    transition: 0.1s;
+    color: black;
+    background-color: white;
+}
+
+.changeFormHyperlink {
+    text-decoration: underline;
+    cursor: pointer;
+    color: blue;
+}
+
+.hidden {
+    display: none;
+}
+
+#verifyEmailDiv {
+    text-align: center;
 }
