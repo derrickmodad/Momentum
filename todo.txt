@@ -3,44 +3,11 @@
 
 //---IN PROGRESS
 
-//WORKING ON THESE NEXT ----- (Derrick)
+//Styling for some months where there is an extra row
+
+//Input validation for sign up and login
+
 //
-//SETUP LOGIN/SIGNUP PAGE
-//--Working on creating login/signup page
-//  Started login html and styling
-//--created and styled both login and signup forms
-//      log in worked with backend, yet to try sign up
-//      also, need to tweak the styling of the logo on home page and the size of the forms
-//          everything is a bit w i d e
-//--update: got the styling to a solid point, also have most features (i think)
-//          now need to focus on input validation:
-//                  email: fits regex
-//                  passwords: matching passwords (for sign-up), min length, character requirements
-//
-//SETUP BACKEND LOGIC TO HANDLE LOGIN AND SIGN UP
-//-- check backend setup, mainly the connection establishment now that the file with the key has been separated
-//     currently an error in the console
-//--update: built primitive sign up service. successfully adds to database and sends verification email and signing in with created account works
-//      Now need to build system that prevents initial user sign in until email has been verified
-//      Also need system for when reusing email verification link, prompts users to sign in 
-//          noticed this after re-clicking email verification link and took me to home page with error in URL query
-//      I did notice that the email verification sending service is slow, something to think about 
-//
-//UPON SIGN IN, LOAD USER INFO
-//  THIS IS A MAIN OBJECTIVE NOW. NEED TO BUILD SYSTEM THAT ONCE USER LOGS IN, THAT USER IS GIVEN CREDENTIALS THAT ARE USED ACROSS THE SITE.
-//  AS OF NOW, ONCE SIGNED IN, THE USER HAS FREE REIGN AND NO DATA IS TIED TO USER. WHAT NEEDS TO HAPPEN IS THAT THERE ARE PERIODIC CHECKS ENSURING THAT THE USER
-//      IS STILL LOGGED IN AND THAT DATA IS BEING PROPERLY SAVED/LOADED FOR EACH USER.
-//
-//DROP DOWN BUTTONS FOR VIEW, MONTH, YEAR
-//  this is next to calendar so user can change to like a weekly (or even daily) view, and can change the month/year
-//--update: got the dropdown buttons for month and year. now need to hook them up
-//          this can be done by building the buttons first, then in buildcalendar get the values from the dropdown to build a calendar.
-//          on change of the dropdowns, we need to save what is in the items array, then rebuild the calendar, then fetch from storage for the selected month/year
-//--update: got the month/year dropdowns working, so user can now select other months and years to view them
-//          now just gotta focus on saving and loading data
-//  --noticed that some months cause the calendar to have an extra row, so some styling is needed for these to make the format consistent
-//
-// -----
 
 //backend thoughts:
 
@@ -63,7 +30,7 @@
 
 //ADD RECURRING TO EVENTS/TASKS
 
-//TOP NAV BAR
+
 
 //found bug with edit feature
 //when user edits item and selects a different day than what the item was originally,
@@ -166,3 +133,44 @@ Test---
 //LOGO
 //  --added logo mk1
 //--This is first edition, may be refined later
+
+//TOP NAV BAR
+
+// Mostly finished
+//
+//SETUP LOGIN/SIGNUP PAGE
+//--Working on creating login/signup page
+//  Started login html and styling
+//--created and styled both login and signup forms
+//      log in worked with backend, yet to try sign up
+//      also, need to tweak the styling of the logo on home page and the size of the forms
+//          everything is a bit w i d e
+//--update: got the styling to a solid point, also have most features (i think)
+//          now need to focus on input validation:
+//                  email: fits regex
+//                  passwords: matching passwords (for sign-up), min length, character requirements
+//
+//SETUP BACKEND LOGIC TO HANDLE LOGIN AND SIGN UP
+//-- check backend setup, mainly the connection establishment now that the file with the key has been separated
+//     currently an error in the console
+//--update: built primitive sign up service. successfully adds to database and sends verification email and signing in with created account works
+//      Now need to build system that prevents initial user sign in until email has been verified
+//      Also need system for when reusing email verification link, prompts users to sign in 
+//          noticed this after re-clicking email verification link and took me to home page with error in URL query
+//      I did notice that the email verification sending service is slow, something to think about 
+//
+//UPON SIGN IN, LOAD USER INFO
+//  THIS IS A MAIN OBJECTIVE NOW. NEED TO BUILD SYSTEM THAT ONCE USER LOGS IN, THAT USER IS GIVEN CREDENTIALS THAT ARE USED ACROSS THE SITE.
+//  AS OF NOW, ONCE SIGNED IN, THE USER HAS FREE REIGN AND NO DATA IS TIED TO USER. WHAT NEEDS TO HAPPEN IS THAT THERE ARE PERIODIC CHECKS ENSURING THAT THE USER
+//      IS STILL LOGGED IN AND THAT DATA IS BEING PROPERLY SAVED/LOADED FOR EACH USER.
+//
+//DROP DOWN BUTTONS FOR VIEW, MONTH, YEAR
+//  this is next to calendar so user can change to like a weekly (or even daily) view, and can change the month/year
+//--update: got the dropdown buttons for month and year. now need to hook them up
+//          this can be done by building the buttons first, then in buildcalendar get the values from the dropdown to build a calendar.
+//          on change of the dropdowns, we need to save what is in the items array, then rebuild the calendar, then fetch from storage for the selected month/year
+//--update: got the month/year dropdowns working, so user can now select other months and years to view them
+//          now just gotta focus on saving and loading data
+//  --noticed that some months cause the calendar to have an extra row, so some styling is needed for these to make the format consistent
+//
+// -----
