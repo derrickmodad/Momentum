@@ -130,7 +130,7 @@ function setupTaskCreationFormControls() {
 
     //finish button
     let finish = document.getElementById("finishTaskCreation");
-    finish.addEventListener("click", function() {
+    finish.addEventListener("click", async function() {
         if (currentlyEditing !== null) {
             itemsForDays[currentlyEditing.day].splice(currentlyEditing.index, 1);
             generateNewTask();
@@ -143,6 +143,9 @@ function setupTaskCreationFormControls() {
         document.getElementById("taskOptions").className = "hidden";
         toggleTaskMenuVisibility();
         document.getElementById("addTaskButton").disabled = false;
+
+        await masterSave();
+
         displayItems(findDay());
     });
 }
@@ -160,13 +163,13 @@ function setupDaysGlobal() {
 
 //function for handling the change of the month/year in calendar.js
 async function masterChange() {
-    //need to save what is in the itemsForDays and completedItemsForDays arrays
-    await saveItemArraysOnChange();
-
     //need to load array with new month and year data
     await setupDaysGlobalParameterized(selectedMonth, selectedYear);
+}
 
-    // displayItems
+async function masterSave() {
+    //need to save what is in the itemsForDays and completedItemsForDays arrays
+    await saveItemArraysOnChange();
 }
 
 async function saveItemArraysOnChange() {
@@ -222,8 +225,8 @@ function packArray(arr, complete, user) {
                     itemOBJ.end_time = it.endTime;
                 }
                 itemOBJ.completed = complete;
-                itemOBJ.year = prevSelectedYear;
-                itemOBJ.month = prevSelectedMonth;
+                itemOBJ.year = selectedYear;
+                itemOBJ.month = selectedMonth;
                 itemOBJ.day = i;
                 insertList.push(itemOBJ);
             }
@@ -367,7 +370,7 @@ function sideLoadForm(item) {
 }
 
 //maybe combine completeItem and undoCompleteItem into one
-function completeItem(id) {
+async function completeItem(id) {
     //find item to be removed
     id = Number(id);
     let day = findDay();
@@ -384,13 +387,14 @@ function completeItem(id) {
     if (index !== -1) {
         completedItemsForDays[day - 1].push(items[index]);
         itemsForDays[day - 1].splice(index, 1);
+        await masterSave();
         displayItems(day);
     } else {
         console.log("could not find " + id + " in day " + day + "!");
     }
 }
 
-function undoCompleteItem(id) {
+async function undoCompleteItem(id) {
     //find item to be removed
     id = Number(id);
     let day = findDay();
@@ -408,6 +412,7 @@ function undoCompleteItem(id) {
         itemsForDays[day - 1].push(items[index]);
         sortItems(day - 1);
         completedItemsForDays[day - 1].splice(index, 1);
+        await masterSave();
         displayItems(day);
     } else {
         console.log("could not find " + id + " in day " + day + "!");
