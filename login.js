@@ -37,6 +37,7 @@ signUpForm.addEventListener("submit", async(e) => {
       data: {
         name
       },
+      emailRedirectTo: 'http://localhost:5500/verification.html'
     },
     password
   });
@@ -52,13 +53,13 @@ function verifyEmail() {
   signUpForm.innerHTML = "";
   document.getElementById("verifyEmailDiv").classList.remove("hidden");
   const verificationInterval = setInterval(async () => {
+    await supabase.auth.getSession();
     const {data} = await supabase.auth.getUser();
-    // console.log(data.user.email_confirmed_at);
     if (data.user && data.user.email_confirmed_at !== null) {
       clearInterval(verificationInterval);
       window.location.href = "index.html";
     }
-  }, 5000);
+  }, 2500);
 }
 
 document.getElementById("loginEmailInput").addEventListener("input", () => {
