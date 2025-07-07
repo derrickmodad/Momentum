@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="images/momentumFavicon.ico">
+    <link rel="stylesheet" href="verification.css">
+    <script src="supabase.js"></script>
+    <script src="config.js"></script>
+    <title>Email Verified</title>
+</head>
+<body>
+    <div>
+        <h1>Email Verified!</h1>
+        <p>Please close this tab and return to the tab where you were signing up.</p>
+    </div>
+    <script>
+        async function handleVerification() {
+          const { data, error } = await supabase.auth.getSessionFromUrl({ storeSession: true });
+    
+          if (error) {
+            console.error('Error confirming email:', error.message);
+            document.body.innerHTML += `<p style="color:red;">Error: ${error.message}</p>`;
+            return;
+          }
+    
+          console.log('User verified and session stored:', data);
+          // You can also close this tab automatically if you want
+        }
+    
+        handleVerification();
+      </script>
+</body>
+</html>
+
+<!-- working here, check chat for the script to validate user and display email confirmation page -->
