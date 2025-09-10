@@ -1,24 +1,5 @@
 "use strict";
 
-/**
- * PLAN
- * 
- * //get the taskbar
-    //build the task
-    //append to body
-    //show event || task on calendar for given day
-
-    //method for adding --
-    //save the div "currentTasks" and its children
-    //hide the currentTasks
-    //show the form addTask
-    //on submit, generate new task, hide form, 
-    //  append task to currentTasks, show currentTasks
-
-    //if event selected, show start time box and end time
-    //if task selected, show deadline box
- */
-
 let itemsForDays = [];
 let completedItemsForDays = [];
 let currentlyEditing = null;
@@ -163,12 +144,12 @@ function setupDaysGlobal() {
 
 //function for handling the change of the month/year in calendar.js
 async function masterChange() {
-    //need to load array with new month and year data
+    //load array with new month and year data
     await setupDaysGlobalParameterized(selectedMonth, selectedYear);
 }
 
 async function masterSave() {
-    //need to save what is in the itemsForDays and completedItemsForDays arrays
+    //save what is in the itemsForDays and completedItemsForDays arrays
     await saveItemArraysOnChange();
 }
 
@@ -188,8 +169,7 @@ async function saveItemArraysOnChange() {
     }
 }
 
-//this may need to be adapted to fit other insert scenarios
-//as of now it is only useful for when the month/year is changed
+//used for when the month/year is changed
 function packArray(arr, complete, user) {
     let insertList = [];
     for (let i = 0; i < arr.length; i++) {
@@ -279,11 +259,6 @@ function findDay() {
     return day[1];
 }
 
-//function to build event/task
-//this function will encode the task and append it to current tasks
-//it will not change the styles or call toggleTaskMenuVisibility
-//  this is due to the calling button (finishTaskCreation) calling
-//      it once this function finishes creating the task
 function generateNewTask() {
     let day = findDay() - 1;
     let form = document.getElementById("addTask");
@@ -355,7 +330,6 @@ function sideLoadForm(item) {
     }
 }
 
-//maybe combine completeItem and undoCompleteItem into one
 async function completeItem(id) {
     //find item to be removed
     id = Number(id);
